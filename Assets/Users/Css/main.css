@@ -1,0 +1,56 @@
+.Heading{
+  border: 1px solid #007bff;
+  background: #007bff;
+  padding: 10px;
+}
+
+.Con-body{
+  border: 1px solid #007bff;
+  padding: 10px;
+}
+
+.jadwal-ruangan{
+  border: 1px solid #007bff;
+}
+
+.jadwal-ruangan td{
+  text-align: center;
+  padding: 10px;
+}
+
+#batal{
+  display: none;
+}
+
+.A108{
+  background: #28a745;
+}
+
+.A111{
+  background: #6c757d;
+}
+
+.A112{
+  background: #17a2b8;
+}
+
+.legend-body{
+  display: flex;
+}
+
+.box{
+  width: 20px;
+  height: 20px;
+}
+
+.legend{
+  margin: 0 5px 0 3px;
+}
+
+.footer{
+  margin-top: 20px;
+  padding: 10px;
+  height: 40px;
+  text-align: center;
+  background: #f2f2f2;
+}
