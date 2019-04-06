@@ -68,10 +68,27 @@
               <th>Jumlah Assistant</th>
               <th>Tanggal</th>
               <th>Kebutuhan Alat</th>
+              <th>Bukti Perizinan</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <?php foreach ($praktikum as $val): ?>
+              <tr>
+                <td><?php echo $val->ruang; ?></td>
+                <td><?php echo $val->jam_masuk; ?></td>
+                <td><?php echo $val->jumlah_jam; ?></td>
+                <td><?php echo $val->matakuliah; ?></td>
+                <td><?php echo $val->kode_dosen; ?></td>
+                <td><?php echo $val->koor; ?></td>
+                <td><?php echo $val->jml_asprak; ?></td>
+                <td><?php echo $val->tanggal; ?></td>
+                <td><?php echo $val->kebutuhan; ?></td>
+                <td><?php echo $val->bukti; ?></td>
+                <td><?php echo $val->status; ?></td>
+              </tr>
+            <?php endforeach; ?>
+            <!-- <tr>
               <td>A3</td>
               <td>16.30</td>
               <td>3</td>
@@ -81,29 +98,7 @@
               <td>5</td>
               <td>17 Mei 2019</td>
               <td>Komputer</td>
-            </tr>
-            <tr>
-              <td>A3</td>
-              <td>16.30</td>
-              <td>3</td>
-              <td>Alpro</td>
-              <td>MKL</td>
-              <td>Sinta</td>
-              <td>5</td>
-              <td>17 Mei 2019</td>
-              <td>Komputer</td>
-            </tr>
-            <tr>
-              <td>A3</td>
-              <td>16.30</td>
-              <td>3</td>
-              <td>Alpro</td>
-              <td>MKL</td>
-              <td>Sinta</td>
-              <td>5</td>
-              <td>17 Mei 2019</td>
-              <td>Komputer</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
         <br>

@@ -18,6 +18,7 @@ class AuthController extends CI_Controller {
 			$data = array(
 				'id' => $mhs['id'],
 				'nama' => $mhs['nama_depan'],
+				'kelas' => $mhs['kelas'],
 				'nim' => $mhs['nim'],
 				'email' => $mhs['email'],
 				'logged_in' => TRUE

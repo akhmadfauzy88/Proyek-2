@@ -18,7 +18,11 @@
   padding: 10px;
 }
 
-#batal{
+#batal_kelas{
+  display: none;
+}
+
+#batal_praktikum{
   display: none;
 }
 
@@ -26,11 +30,11 @@
   background: #28a745;
 }
 
-.A111{
+.approved{
   background: #6c757d;
 }
 
-.A112{
+.pending{
   background: #17a2b8;
 }
 

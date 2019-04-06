@@ -28,150 +28,85 @@
           <input type="submit" name="submit" value="[+] Pinjam Ruangan" class="btn btn-primary">
         </form>
         <hr>
+        <?php foreach ($kelas as $value): ?>
+          <?php if ($value->tanggal == date("Y-m-d")): ?>
+            <?php for ($i=$value->jumlah_jam; $i >=1 ; $i--): ?>
+              <?php echo $value->ruang; ?>
+              <?php echo $value->kelas; ?>
+              <?php echo $value->jam_masuk; ?>
+              <?php echo $value->jumlah_jam; ?>
+              <?php echo $value->tanggal; ?>
+              <br>
+            <?php endfor; ?>
+            <br>
+          <?php endif; ?>
+        <?php endforeach; ?>
+        <hr>
         <table border="1" class="jadwal-ruangan">
           <tr>
-            <td>RUANGAN / JAM</td>
-            <td>08.00</td>
-            <td>09.00</td>
-            <td>10.00</td>
-            <td>11.00</td>
-            <td>12.00</td>
-            <td>13.00</td>
-            <td>14.00</td>
-            <td>15.00</td>
-            <td>16.00</td>
-            <td>17.00</td>
-            <td>18.00</td>
-            <td>19.00</td>
-            <td>20.00</td>
+            <td>Ruangan</td>
+            <?php foreach ($kelas as $value): ?>
+              <?php if ($value->ruang == "A1" && $value->tanggal == date("Y-m-d")): ?>
+                <?php
+                  $jam = explode(":", $value->jam_masuk);
+                ?>
+                <?php for ($i=$value->jumlah_jam; $i >0 ; $i--): ?>
+                  <td>
+                    <?php
+                      echo $jam[0].":".$jam[1];
+                      $jam[0]++;
+                    ?>
+                  </td>
+                <?php endfor; ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
           </tr>
           <tr>
             <td>A1</td>
-            <td class="A108">MI-41-01</td>
-            <td class="A108">MI-41-01</td>
-            <td class="A108">MI-41-01</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <?php foreach ($kelas as $value): ?>
+              <?php if ($value->ruang == "A1" && $value->tanggal == date("Y-m-d")): ?>
+                <?php for ($i=$value->jumlah_jam; $i >0 ; $i--): ?>
+                  <td>
+                    <?php echo $value->kelas; ?>
+                  </td>
+                <?php endfor; ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
           </tr>
+        </table>
+
+        <br>
+
+        <table border="1" class="jadwal-ruangan">
           <tr>
-            <td>A2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="A111">MI-41-01</td>
-            <td class="A111">MI-41-01</td>
-            <td class="A111">MI-41-01</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>A3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="A112">MI-41-01</td>
-            <td class="A112">MI-41-01</td>
-            <td class="A112">MI-41-01</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>A4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="A111">MI-41-01</td>
-            <td class="A111">MI-41-01</td>
-            <td class="A111">MI-41-01</td>
-            <td></td>
+            <td>Ruangan</td>
+            <?php foreach ($kelas as $value): ?>
+              <?php if ($value->ruang == "B1" && $value->tanggal == date("Y-m-d")): ?>
+                <?php
+                  $jam = explode(":", $value->jam_masuk);
+                ?>
+                <?php for ($i=$value->jumlah_jam; $i >0 ; $i--): ?>
+                  <td>
+                    <?php
+                      echo $jam[0].":".$jam[1];
+                      $jam[0]++;
+                    ?>
+                  </td>
+                <?php endfor; ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
           </tr>
           <tr>
             <td>B1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="A108">MI-41-01</td>
-            <td class="A108">MI-41-01</td>
-            <td class="A108">MI-41-01</td>
-          </tr>
-          <tr>
-            <td>B2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="A108">MI-41-01</td>
-            <td class="A108">MI-41-01</td>
-            <td class="A108">MI-41-01</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>B3</td>
-            <td class="A108">MI-41-01</td>
-            <td class="A108">MI-41-01</td>
-            <td class="A108">MI-41-01</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>B4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="A111">MI-41-01</td>
-            <td class="A111">MI-41-01</td>
-            <td class="A111">MI-41-01</td>
-            <td></td>
+            <?php foreach ($kelas as $value): ?>
+              <?php if ($value->ruang == "B1" && $value->tanggal == date("Y-m-d")): ?>
+                <?php for ($i=$value->jumlah_jam; $i >0 ; $i--): ?>
+                  <td>
+                    <?php echo $value->kelas; ?>
+                  </td>
+                <?php endfor; ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
           </tr>
         </table>
         <hr>

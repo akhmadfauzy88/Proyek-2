@@ -66,7 +66,7 @@
                 <td><?php echo $val->tanggal; ?></td>
                 <td><?php echo $val->kebutuhan; ?></td>
                 <td>
-                  <a href="#" class="btn btn-danger" onclick="batalkan(<?php echo $val->id; ?>)">Batalkan</a>
+                  <a href="#" class="btn btn-danger" onclick="batalkan_kelas(<?php echo $val->id; ?>)">Batalkan</a>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -88,9 +88,42 @@
         <hr>
         <br>
         PRAKTIKUM
-        <small>
-          <i><br>Data Not Found.</i>
-        </small>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Ruangan</th>
+              <th>Jam Masuk</th>
+              <th>Jumlah Jam</th>
+              <th>Mata Kuliah</th>
+              <th>Kode Dosen</th>
+              <th>Koordinator Assistant</th>
+              <th>Jumlah Assistant</th>
+              <th>Tanggal</th>
+              <th>Kebutuhan Alat</th>
+              <th>Bukti Peminjaman</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($praktikum as $val): ?>
+              <tr>
+                <td><?php echo $val->ruang; ?></td>
+                <td><?php echo $val->jam_masuk; ?></td>
+                <td><?php echo $val->jumlah_jam; ?></td>
+                <td><?php echo $val->matakuliah; ?></td>
+                <td><?php echo $val->kode_dosen; ?></td>
+                <td><?php echo $val->koor; ?></td>
+                <td><?php echo $val->jml_asprak; ?></td>
+                <td><?php echo $val->tanggal; ?></td>
+                <td><?php echo $val->kebutuhan; ?></td>
+                <td><?php echo $val->bukti; ?></td>
+                <td>
+                  <a href="#" class="btn btn-danger" onclick="batalkan_praktikum(<?php echo $val->id; ?>)">Batalkan</a>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
         <br>
         <hr>
         <br>
@@ -100,39 +133,76 @@
         </small>
       </div>
     </div>
-    <div class="col-md-10" style="margin-top: 15px;" id="batal">
 
+    <div class="col-md-10" style="margin-top: 15px;" id="batal_kelas">
       <div class="Heading">
-        FEEDBACK PEMBATALAN
+        FEEDBACK PEMBATALAN KELAS
       </div>
       <div class="Con-body">
         <form action="<?php echo base_url() ?>cancel_kelas" method="post">
-          <input type="hidden" name="id" id="idn" value="">
+          <input type="hidden" name="id" id="idx" value="">
           <label for="">Please Give US a Feedback</label>
-          <textarea name="pesan" id="pesan" class="form-control" style="height:150px;"></textarea>
-          <input type="submit" name="submit" value="SUBMIT" class="btn btn-block btn-success" style="margin-top:10px;" onclick="return go()">
-          <input type="button" name="button" value="CANCEL" class="btn btn-block btn-danger" style="margin-top:10px;" onclick="cancel()">
+          <textarea name="pesan" id="pesanx" class="form-control" style="height:150px;"></textarea>
+          <input type="submit" name="submit" value="SUBMIT" class="btn btn-block btn-success" style="margin-top:10px;" onclick="return go_kelas()">
+          <input type="button" name="button" value="CANCEL" class="btn btn-block btn-danger" style="margin-top:10px;" onclick="cancel_kelas()">
         </form>
       </div>
     </div>
+
+    <div class="col-md-10" style="margin-top: 15px;" id="batal_praktikum">
+      <div class="Heading">
+        FEEDBACK PEMBATALAN PRAKTIKUM
+      </div>
+      <div class="Con-body">
+        <form action="<?php echo base_url() ?>cancel_praktikum" method="post">
+          <input type="hidden" name="id" id="idy" value="">
+          <label for="">Please Give US a Feedback</label>
+          <textarea name="pesan" id="pesany" class="form-control" style="height:150px;"></textarea>
+          <input type="submit" name="submit" value="SUBMIT" class="btn btn-block btn-success" style="margin-top:10px;" onclick="return go_praktikum()">
+          <input type="button" name="button" value="CANCEL" class="btn btn-block btn-danger" style="margin-top:10px;" onclick="cancel_kelas()">
+        </form>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script type="text/javascript">
-  function go(){
-    if (document.getElementById('pesan').value == "") {
+  function go_kelas(){
+    if (document.getElementById('pesanx').value == "") {
       document.getElementById('alert_cancel').style.display = "block";
       return false;
     }
   }
-  function cancel(){
-    var blok = document.getElementById("batal");
-    batal.style.display = "none";
+
+  function go_praktikum(){
+    if (document.getElementById('pesany').value == "") {
+      document.getElementById('alert_cancel').style.display = "block";
+      return false;
+    }
   }
-  function batalkan(id){
-    var blok = document.getElementById("batal");
-    var idx = document.getElementById('idn');
-    idn.value = id;
-    batal.style.display = "block";
+
+  function cancel_kelas(){
+    var blok = document.getElementById("batal_kelas");
+    blok.style.display = "none";
   }
+
+  function batalkan_kelas(id){
+    var blokx = document.getElementById("batal_kelas");
+    var bloky = document.getElementById("batal_praktikum");
+    var idx = document.getElementById('idx');
+    idx.value = id;
+    blokx.style.display = "block";
+    bloky.style.display = "none";
+  }
+
+  function batalkan_praktikum(id){
+    var blokx = document.getElementById("batal_praktikum");
+    var bloky = document.getElementById("batal_kelas");
+    var idx = document.getElementById('idy');
+    idx.value = id;
+    blokx.style.display = "block";
+    bloky.style.display = "none";
+  }
+
 </script>

@@ -4,11 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class UserMainController extends CI_Controller {
 	public function index(){
 
+		$this->load->model('GetDataModel');
+		$status['kelas'] = $this->GetDataModel->get_pinjam_kelas();
+		$status['praktikum'] = $this->GetDataModel->get_pinjam_praktikum();
+
     $data['judul'] = "Landing Page";
     $data['css'] = base_url()."Assets/Users/Css/main.css";
 
     $this->load->view('User-page/Template/Header', $data);
-		$this->load->view('User-page/Dashboard/index');
+		$this->load->view('User-page/Dashboard/index', $status);
     $this->load->view('User-page/Template/Footer');
 	}
 
@@ -18,6 +22,7 @@ class UserMainController extends CI_Controller {
 
 		$this->load->model('GetDataModel');
 		$status['kelas'] = $this->GetDataModel->get_status_kelas($id);
+		$status['praktikum'] = $this->GetDataModel->get_status_praktikum($id);
 
     $data['judul'] = "Status Peminjaman";
     $data['css'] = base_url()."Assets/Users/Css/main.css";
@@ -33,6 +38,7 @@ class UserMainController extends CI_Controller {
 
 		$this->load->model('GetDataModel');
 		$history['kelas'] = $this->GetDataModel->get_history_kelas($id);
+		$history['praktikum'] = $this->GetDataModel->get_history_praktikum($id);
 
     $data['judul'] = "History Peminjaman";
     $data['css'] = base_url()."Assets/Users/Css/main.css";

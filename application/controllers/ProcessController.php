@@ -8,19 +8,19 @@ class ProcessController extends CI_Controller {
 
 	public function pinjam(){
     $opt = $this->input->post("pinjamruangan");
-    //echo $opt;
+
+		$this->load->model('GetDataModel');
+		$data_kelas['kelas'] = $this->GetDataModel->get_data_kelas();
+		$data_kelas['dosen'] = $this->GetDataModel->get_data_dosen();
+
 		if ($opt == "rapat") {
-			$data['judul'] = "Peminjaman Ruangan - Rapat";
+			$data['judul'] = "Peminjaman Ruangan - Praktikum";
 	    $data['css'] = base_url()."Assets/Users/Css/main.css";
 
 			$this->load->view('User-page/Template/Header', $data);
-			$this->load->view('User-page/Dashboard/praktikum');
+			$this->load->view('User-page/Dashboard/praktikum', $data_kelas);
 	    $this->load->view('User-page/Template/Footer');
 		}else if($opt == "kelas"){
-			$this->load->model('GetDataModel');
-			$data_kelas['kelas'] = $this->GetDataModel->get_data_kelas();
-			$data_kelas['dosen'] = $this->GetDataModel->get_data_dosen();
-
 			$data['judul'] = "Peminjaman Ruangan - Kelas Pengganti";
 	    $data['css'] = base_url()."Assets/Users/Css/main.css";
 
@@ -48,6 +48,7 @@ class ProcessController extends CI_Controller {
 
 	public function input_transaksi_kelas(){
 		$nama = $this->input->post("nama");
+		$kelas = $this->input->post("kelas");
 		$ruang = $this->input->post("ruang");
 		$jam_masuk = $this->input->post("jam_masuk");
 		$pinjamruangan = $this->input->post("pinjamruangan");
@@ -57,7 +58,7 @@ class ProcessController extends CI_Controller {
 		$kebutuhan = $this->input->post("kebutuhan");
 
 		$this->load->model('InputDataModel');
-		$this->InputDataModel->input_data_kelas_pengganti($nama, $ruang, $jam_masuk, $pinjamruangan, $matakuliah, $kode_dosen, $tanggal, $kebutuhan);
+		$this->InputDataModel->input_data_kelas_pengganti($nama, $kelas, $ruang, $jam_masuk, $pinjamruangan, $matakuliah, $kode_dosen, $tanggal, $kebutuhan);
 		$this->session->set_flashdata('log_kelas', 'TRUE');
 		redirect(base_url("Status"));
 	}
@@ -69,6 +70,36 @@ class ProcessController extends CI_Controller {
 		$this->UpdateDataModel->update_data_kelas_pengganti($id);
 
 		$this->session->set_flashdata('log_kelas_cancel', 'TRUE');
+		redirect(base_url("Status"));
+	}
+
+	public function cancel_transaksi_praktikum(){
+		$id = $this->input->post("id");
+
+		$this->load->model('UpdateDataModel');
+		$this->UpdateDataModel->update_data_praktikum($id);
+
+		$this->session->set_flashdata('log_praktikum_cancel', 'TRUE');
+		redirect(base_url("Status"));
+	}
+
+	public function input_transaksi_praktikum(){
+		$nama = $this->input->post("nama");
+		$kelas = $this->input->post("kelas");
+		$ruang = $this->input->post("ruang");
+		$jam_masuk = $this->input->post("jam_masuk");
+		$pinjamruangan = $this->input->post("pinjamruangan");
+		$matakuliah = $this->input->post("matakuliah");
+		$kode_dosen = $this->input->post("kode_dosen");
+		$koor = $this->input->post("koor");
+		$jml_asprak = $this->input->post("jml_asprak");
+		$tanggal = $this->input->post("tanggal");
+		$kebutuhan = $this->input->post("kebutuhan");
+		$bukti = $this->input->post("bukti");
+
+		$this->load->model('InputDataModel');
+		$this->InputDataModel->input_data_praktikum($nama, $kelas, $ruang, $jam_masuk, $pinjamruangan, $matakuliah, $kode_dosen, $koor, $jml_asprak, $tanggal, $kebutuhan, $bukti);
+		$this->session->set_flashdata('log_praktikum', 'TRUE');
 		redirect(base_url("Status"));
 	}
 
