@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2019 at 08:51 PM
+-- Generation Time: Apr 07, 2019 at 02:11 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -97,6 +97,7 @@ INSERT INTO `pesan` (`id`, `nama`, `email`, `subject`, `pesan`) VALUES
 CREATE TABLE `transaksi_kelas` (
   `id` int(11) NOT NULL,
   `peminjam` int(11) NOT NULL,
+  `kelas` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ruang` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jam_masuk` time NOT NULL,
   `jumlah_jam` int(2) NOT NULL,
@@ -111,10 +112,52 @@ CREATE TABLE `transaksi_kelas` (
 -- Dumping data for table `transaksi_kelas`
 --
 
-INSERT INTO `transaksi_kelas` (`id`, `peminjam`, `ruang`, `jam_masuk`, `jumlah_jam`, `matakuliah`, `kode_dosen`, `tanggal`, `kebutuhan`, `status`) VALUES
-(1, 1, 'A1', '08:00:00', 3, 'SQL', 'AKF', '2019-04-01', '-', 'approved'),
-(2, 1, 'A6', '12:00:00', 2, 'SQLi', 'AKF', '2019-04-01', 'Komputer', 'pending'),
-(3, 1, 'A1', '08:00:00', 2, 'SS', 'AKF', '2019-04-03', '-', 'canceled');
+INSERT INTO `transaksi_kelas` (`id`, `peminjam`, `kelas`, `ruang`, `jam_masuk`, `jumlah_jam`, `matakuliah`, `kode_dosen`, `tanggal`, `kebutuhan`, `status`) VALUES
+(1, 1, 'MI-41-01', 'A1', '08:00:00', 3, 'SQL', 'AKF', '2019-04-01', '-', 'approved'),
+(2, 1, 'MI-41-01', 'A6', '12:00:00', 2, 'SQLi', 'AKF', '2019-04-01', 'Komputer', 'pending'),
+(3, 1, 'MI-41-01', 'A1', '08:00:00', 2, 'SS', 'AKF', '2019-04-03', '-', 'canceled'),
+(4, 1, 'MI-41-01', 'A1', '03:00:00', 3, 'SS', 'AKF', '2019-04-06', 't', 'pending'),
+(5, 1, 'MI-41-01', 'A1', '09:00:00', 2, 'SS', 'AKF', '2019-04-17', '-', 'pending'),
+(6, 1, 'MI-41-01', 'A1', '08:00:00', 2, 'SS', 'AKF', '2019-04-07', '-', 'pending'),
+(7, 1, 'MI-41-01', 'A1', '12:00:00', 2, 'SS', 'AKF', '2019-04-07', '-', 'approved'),
+(8, 1, 'MI-41-01', 'B1', '08:00:00', 3, 'SS', 'AKF', '2019-04-07', '-', 'pending'),
+(9, 1, 'MI-41-01', 'B3', '11:00:00', 3, 'SS', 'AKF', '2019-04-07', '-', 'pending'),
+(10, 1, 'MI-41-01', 'B3', '08:00:00', 2, 'SS', 'AKF', '2019-04-07', '-', 'pending'),
+(11, 1, 'MI-41-01', 'A1', '18:00:00', 2, 'SS', 'AKF', '2019-04-07', '-', 'pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi_praktikum`
+--
+
+CREATE TABLE `transaksi_praktikum` (
+  `id` int(11) NOT NULL,
+  `peminjam` int(11) NOT NULL,
+  `kelas` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ruang` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jam_masuk` time NOT NULL,
+  `jumlah_jam` int(2) NOT NULL,
+  `matakuliah` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kode_dosen` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `koor` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jml_asprak` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `kebutuhan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bukti` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transaksi_praktikum`
+--
+
+INSERT INTO `transaksi_praktikum` (`id`, `peminjam`, `kelas`, `ruang`, `jam_masuk`, `jumlah_jam`, `matakuliah`, `kode_dosen`, `koor`, `jml_asprak`, `tanggal`, `kebutuhan`, `bukti`, `status`) VALUES
+(1, 1, 'MI-41-01', 'A1', '12:00:00', 2, 'SQL', 'AKF', 'Juleha', 6, '2019-04-02', '-', 'asfasfasf', 'pending'),
+(2, 1, 'MI-41-01', 'A1', '12:00:00', 2, 'SS', 'AKF', 'Selena', 6, '2019-04-05', '-', 'readme.rst', 'canceled'),
+(3, 1, 'MI-41-01', 'B1', '08:00:00', 2, 'SS', 'AKF', 'Selena Jo', 6, '2019-04-10', '-', 'index.php', 'pending'),
+(4, 1, 'MI-41-01', 'A1', '09:00:00', 2, 'SS', 'AKF', 'Selena', 6, '2019-04-06', '-', 'proyek2.sql', 'pending'),
+(5, 1, 'MI-41-01', 'B1', '09:00:00', 1, 'SS', 'AKF', 'Selena Jo', 6, '2019-04-07', '-', '.gitattributes', 'pending');
 
 -- --------------------------------------------------------
 
@@ -152,6 +195,7 @@ CREATE TABLE `users_mhs` (
   `password` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_depan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_belakang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kelas` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -159,10 +203,10 @@ CREATE TABLE `users_mhs` (
 -- Dumping data for table `users_mhs`
 --
 
-INSERT INTO `users_mhs` (`id`, `username`, `nim`, `password`, `nama_depan`, `nama_belakang`, `email`) VALUES
-(1, 'berlianaputri', '6701174026', 'cocok', 'Berliana', 'Putri Meliani', 'ber_putri@gmail.com'),
-(2, 'fadhilahfz', '0001', 'Bandung123', 'Fadhilah', 'Fazrin', 'fadhilahfz@gmail.com'),
-(3, 'hestistrsmi', '4046', 'Hesti123', 'Hesti', 'Sitaresmi', 'hesti99@gmail.com');
+INSERT INTO `users_mhs` (`id`, `username`, `nim`, `password`, `nama_depan`, `nama_belakang`, `kelas`, `email`) VALUES
+(1, 'berlianaputri', '6701174026', 'cocok', 'Berliana', 'Putri Meliani', 'MI-41-01', 'ber_putri@gmail.com'),
+(2, 'fadhilahfz', '0001', 'Bandung123', 'Fadhilah', 'Fazrin', 'MI-41-01', 'fadhilahfz@gmail.com'),
+(3, 'hestistrsmi', '4046', 'Hesti123', 'Hesti', 'Sitaresmi', 'MI-41-01', 'hesti99@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -187,7 +231,7 @@ CREATE TABLE `users_teacher` (
 --
 
 INSERT INTO `users_teacher` (`id`, `kode`, `username`, `nip`, `password`, `nama_depan`, `nama_belakang`, `email`, `lab_id`) VALUES
-(1, 'AKF', 'akfzy', '4050', 'cocok', 'Akhmad', 'Fauzy', 'akfzy@gmail.com', 1),
+(1, 'AKF', 'akfzy', '4050', 'cocok', 'Akhmad', 'Fauzy', 'akfzy@gmail.com', 19),
 (2, 'DWB', 'dadiwbw', '4156', '12345678', 'Dadi', 'Wibowo', 'dadiw@gmail.com', 3),
 (3, 'MRJ', 'marjono', '3152', 'Mar31245', 'Marjono', 'Marjono', 'marjono@gmail.com', 4);
 
@@ -217,6 +261,15 @@ ALTER TABLE `transaksi_kelas`
   ADD KEY `ruang` (`ruang`),
   ADD KEY `kode_dosen` (`kode_dosen`),
   ADD KEY `peminjam` (`peminjam`);
+
+--
+-- Indexes for table `transaksi_praktikum`
+--
+ALTER TABLE `transaksi_praktikum`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `peminjam` (`peminjam`),
+  ADD KEY `ruang` (`ruang`),
+  ADD KEY `kode_dosen` (`kode_dosen`);
 
 --
 -- Indexes for table `users_lak`
@@ -264,7 +317,13 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `transaksi_kelas`
 --
 ALTER TABLE `transaksi_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `transaksi_praktikum`
+--
+ALTER TABLE `transaksi_praktikum`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users_lak`
@@ -301,6 +360,12 @@ ALTER TABLE `transaksi_kelas`
   ADD CONSTRAINT `transaksi_kelas_ibfk_1` FOREIGN KEY (`kode_dosen`) REFERENCES `users_teacher` (`kode`),
   ADD CONSTRAINT `transaksi_kelas_ibfk_2` FOREIGN KEY (`peminjam`) REFERENCES `users_mhs` (`id`),
   ADD CONSTRAINT `transaksi_kelas_ibfk_3` FOREIGN KEY (`ruang`) REFERENCES `laboratory` (`lab_name`);
+
+--
+-- Constraints for table `transaksi_praktikum`
+--
+ALTER TABLE `transaksi_praktikum`
+  ADD CONSTRAINT `transaksi_praktikum_ibfk_1` FOREIGN KEY (`kode_dosen`) REFERENCES `users_teacher` (`kode`);
 
 --
 -- Constraints for table `users_teacher`
