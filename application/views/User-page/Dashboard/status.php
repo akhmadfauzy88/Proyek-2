@@ -183,8 +183,10 @@
   }
 
   function cancel_kelas(){
-    var blok = document.getElementById("batal_kelas");
-    blok.style.display = "none";
+    var blokx = document.getElementById("batal_kelas");
+    var bloky = document.getElementById("batal_praktikum");
+    blokx.style.display = "none";
+    bloky.style.display = "none";
   }
 
   function batalkan_kelas(id){

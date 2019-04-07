@@ -11,4 +11,10 @@ class LoginModel extends CI_Model {
     $data = $query->row_array();
     return $data;
   }
+
+  public function get_auth_lak($user, $pass){
+    $query = $this->db->get_where('users_lak', array('username' => $user, 'password' => $pass));
+    $data = $query->row_array();
+    return $data;
+  }
 }

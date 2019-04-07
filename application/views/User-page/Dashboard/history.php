@@ -56,51 +56,53 @@
         <hr>
         <br>
         PRAKTIKUM
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Ruangan</th>
-              <th>Jam Masuk</th>
-              <th>Jumlah Jam</th>
-              <th>Mata Kuliah</th>
-              <th>Kode Dosen</th>
-              <th>Koordinator Praktikum</th>
-              <th>Jumlah Assistant</th>
-              <th>Tanggal</th>
-              <th>Kebutuhan Alat</th>
-              <th>Bukti Perizinan</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($praktikum as $val): ?>
+        <div style="overflow:scroll;">
+          <table class="table table-striped">
+            <thead>
               <tr>
-                <td><?php echo $val->ruang; ?></td>
-                <td><?php echo $val->jam_masuk; ?></td>
-                <td><?php echo $val->jumlah_jam; ?></td>
-                <td><?php echo $val->matakuliah; ?></td>
-                <td><?php echo $val->kode_dosen; ?></td>
-                <td><?php echo $val->koor; ?></td>
-                <td><?php echo $val->jml_asprak; ?></td>
-                <td><?php echo $val->tanggal; ?></td>
-                <td><?php echo $val->kebutuhan; ?></td>
-                <td><?php echo $val->bukti; ?></td>
-                <td><?php echo $val->status; ?></td>
+                <th>Ruangan</th>
+                <th>Jam Masuk</th>
+                <th>Jumlah Jam</th>
+                <th>Mata Kuliah</th>
+                <th>Kode Dosen</th>
+                <th>Koordinator Praktikum</th>
+                <th>Jumlah Assistant</th>
+                <th>Tanggal</th>
+                <th>Kebutuhan Alat</th>
+                <th>Bukti Perizinan</th>
+                <th>Status</th>
               </tr>
-            <?php endforeach; ?>
-            <!-- <tr>
-              <td>A3</td>
-              <td>16.30</td>
-              <td>3</td>
-              <td>Alpro</td>
-              <td>MKL</td>
-              <td>Sinta</td>
-              <td>5</td>
-              <td>17 Mei 2019</td>
-              <td>Komputer</td>
-            </tr> -->
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <?php foreach ($praktikum as $val): ?>
+                <tr>
+                  <td><?php echo $val->ruang; ?></td>
+                  <td><?php echo $val->jam_masuk; ?></td>
+                  <td><?php echo $val->jumlah_jam; ?></td>
+                  <td><?php echo $val->matakuliah; ?></td>
+                  <td><?php echo $val->kode_dosen; ?></td>
+                  <td><?php echo $val->koor; ?></td>
+                  <td><?php echo $val->jml_asprak; ?></td>
+                  <td><?php echo $val->tanggal; ?></td>
+                  <td><?php echo $val->kebutuhan; ?></td>
+                  <td><?php echo $val->bukti; ?></td>
+                  <td><?php echo $val->status; ?></td>
+                </tr>
+              <?php endforeach; ?>
+              <!-- <tr>
+                <td>A3</td>
+                <td>16.30</td>
+                <td>3</td>
+                <td>Alpro</td>
+                <td>MKL</td>
+                <td>Sinta</td>
+                <td>5</td>
+                <td>17 Mei 2019</td>
+                <td>Komputer</td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
         <br>
         <hr>
         <br>

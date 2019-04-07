@@ -13,6 +13,7 @@ class AuthController extends CI_Controller {
 		$this->load->model('LoginModel');
 		$mhs = $this->LoginModel->get_auth_mhs($user, $pass);
 		$tch = $this->LoginModel->get_auth_tch($user, $pass);
+		$lak = $this->LoginModel->get_auth_lak($user, $pass);
 
 		if (isset($mhs)) {
 			$data = array(
@@ -31,6 +32,16 @@ class AuthController extends CI_Controller {
 				'nama_b' => $tch['nama_belakang'],
 				'email' => $tch['email'],
 				'nip' => $tch['nip'],
+				'logged_in' => TRUE
+			);
+			$this->session->set_userdata($data);
+			redirect(base_url("Dashboard"));
+		}elseif (isset($lak)) {
+			$data = array(
+				'nama' => $lak['nama_depan'],
+				'nama_b' => $lak['nama_belakang'],
+				'email' => $lak['email'],
+				'id_peg' => $lak['id_peg'],
 				'logged_in' => TRUE
 			);
 			$this->session->set_userdata($data);
