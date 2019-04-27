@@ -5,8 +5,8 @@ class UserMainController extends CI_Controller {
 	public function index(){
 
 		$this->load->model('GetDataModel');
-		$status['kelas'] = $this->GetDataModel->get_pinjam_kelas();
-		$status['praktikum'] = $this->GetDataModel->get_pinjam_praktikum();
+		$status['transaksi'] = $this->GetDataModel->get_penjadwalan();
+		//$status['praktikum'] = $this->GetDataModel->get_pinjam_praktikum();
 
     $data['judul'] = "Landing Page";
     $data['css'] = base_url()."Assets/Users/Css/main.css";

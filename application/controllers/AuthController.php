@@ -19,6 +19,7 @@ class AuthController extends CI_Controller {
 			$data = array(
 				'id' => $mhs['id'],
 				'nama' => $mhs['nama_depan'],
+				'nama_b' => $mhs['nama_belakang'],
 				'kelas' => $mhs['kelas'],
 				'nim' => $mhs['nim'],
 				'email' => $mhs['email'],
@@ -28,6 +29,7 @@ class AuthController extends CI_Controller {
 			redirect(base_url("Dashboard"));
 		}elseif (isset($tch)) {
 			$data = array(
+				'id' => $tch['id'],
 				'nama' => $tch['nama_depan'],
 				'nama_b' => $tch['nama_belakang'],
 				'email' => $tch['email'],
@@ -38,6 +40,7 @@ class AuthController extends CI_Controller {
 			redirect(base_url("Dashboard"));
 		}elseif (isset($lak)) {
 			$data = array(
+				'id' => $lak['id'],
 				'nama' => $lak['nama_depan'],
 				'nama_b' => $lak['nama_belakang'],
 				'email' => $lak['email'],

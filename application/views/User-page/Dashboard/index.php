@@ -28,7 +28,7 @@
           <input type="submit" name="submit" value="[+] Pinjam Ruangan" class="btn btn-primary">
         </form>
         <hr>
-        <?php foreach ($kelas as $value): ?>
+        <!-- <?php foreach ($kelas as $value): ?>
           <?php if ($value->tanggal == date("Y-m-d")): ?>
             <?php for ($i=$value->jumlah_jam; $i >=1 ; $i--): ?>
               <?php echo $value->ruang; ?>
@@ -108,6 +108,84 @@
               <?php endif; ?>
             <?php endforeach; ?>
           </tr>
+        </table> -->
+        <table border="1" class="jadwal-ruangan" align="center">
+          <tr>
+            <td>Ruang \ Jam</td>
+            <td>08:00</td>
+            <td>09:00</td>
+            <td>10:00</td>
+            <td>11:00</td>
+            <td>12:00</td>
+            <td>13:00</td>
+            <td>14:00</td>
+            <td>15:00</td>
+            <td>16:00</td>
+            <td>17:00</td>
+            <td>18:00</td>
+          </tr>
+          <?php foreach ($transaksi as $value): ?>
+            <tr>
+              <td>
+                <?php echo $value->kode ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "08:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "09:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "10:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "11:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "12:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "13:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "14:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "15:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "16:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "17:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($value->jam == "18:00:00"): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </table>
         <hr>
         PERATURAN PEMINJAMAN

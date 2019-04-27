@@ -55,10 +55,9 @@ class ProcessController extends CI_Controller {
 		$matakuliah = $this->input->post("matakuliah");
 		$kode_dosen = $this->input->post("kode_dosen");
 		$tanggal = $this->input->post("tanggal");
-		$kebutuhan = $this->input->post("kebutuhan");
 
 		$this->load->model('InputDataModel');
-		$this->InputDataModel->input_data_kelas_pengganti($nama, $kelas, $ruang, $jam_masuk, $pinjamruangan, $matakuliah, $kode_dosen, $tanggal, $kebutuhan);
+		$this->InputDataModel->input_data_kelas_pengganti($nama, $kelas, $ruang, $jam_masuk, $pinjamruangan, $matakuliah, $kode_dosen, $tanggal);
 		$this->session->set_flashdata('log_kelas', 'TRUE');
 		redirect(base_url("Status"));
 	}
