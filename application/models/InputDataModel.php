@@ -14,8 +14,8 @@ class InputDataModel extends CI_Model {
   public function input_data_kelas_pengganti($nama, $kelas, $ruang, $jam_masuk, $pinjamruangan, $matakuliah, $kode_dosen, $tanggal){
     $data = array(
         'peminjam' => $nama,
-        'kelas' => $kelas,
-        'ruang' => $ruang,
+        //'kelas' => $kelas,
+        'ruangan' => $ruang,
         'jam_masuk' => $jam_masuk,
         'jumlah_jam' => $pinjamruangan,
         'matakuliah' => $matakuliah,
@@ -23,22 +23,21 @@ class InputDataModel extends CI_Model {
         'tanggal' => $tanggal,
         'kebutuhan' => NULL,
         'bukti' => NULL,
+        'keterangan' => 'kelas',
         'status' => 'pending'
     );
 
     $jm = $jam_masuk;
 
-    echo $jm;
-    die();
+    // echo $jm;
+    // die();
 
     for($i=0;$i<$pinjamruangan;$i++){
-      $jml = "PT".$i."H";
-      $jm = new DateTime($jm);
-      $jm->add(new DateInterval($jml));
-      $jam = $jm->format('H:i:s');
+      $tambahjam = strtotime($jm) + 60*60;
+      $jm = date('H:i:s', $tambahjam);
       $dat = array(
         'tanggal' => $tanggal,
-        'jam' => $jam,
+        'jam' => $jm,
         'ruang' => $ruang,
         'kelas' => $kelas
       );

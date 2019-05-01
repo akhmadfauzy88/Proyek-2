@@ -13,7 +13,7 @@
     <div class="col-8" style="margin-top: 15px;">
 
       <div class="Heading">
-        JADWAL PEMINJAMAN
+        JADWAL PEMINJAMAN <?php echo $_SESSION['kelas']; ?>
       </div>
       <div class="Con-body">
         <form class="" action="<?php echo base_url();?>pinjam" method="post">
@@ -28,164 +28,278 @@
           <input type="submit" name="submit" value="[+] Pinjam Ruangan" class="btn btn-primary">
         </form>
         <hr>
-        <!-- <?php foreach ($kelas as $value): ?>
-          <?php if ($value->tanggal == date("Y-m-d")): ?>
-            <?php for ($i=$value->jumlah_jam; $i >=1 ; $i--): ?>
-              <?php echo $value->ruang; ?>
-              <?php echo $value->kelas; ?>
-              <?php echo $value->jam_masuk; ?>
-              <?php echo $value->jumlah_jam; ?>
-              <?php echo $value->tanggal; ?>
-              <br>
-            <?php endfor; ?>
-            <br>
-          <?php endif; ?>
-        <?php endforeach; ?>
-        <hr>
-        <table border="1" class="jadwal-ruangan">
-          <tr>
-            <td>Ruangan</td>
-            <?php foreach ($kelas as $value): ?>
-              <?php if ($value->ruang == "A1" && $value->tanggal == date("Y-m-d")): ?>
-                <?php
-                  $jam = explode(":", $value->jam_masuk);
-                ?>
-                <?php for ($i=$value->jumlah_jam; $i >0 ; $i--): ?>
-                  <td>
-                    <?php
-                      echo $jam[0].":".$jam[1];
-                      $jam[0]++;
-                    ?>
-                  </td>
-                <?php endfor; ?>
-              <?php endif; ?>
-            <?php endforeach; ?>
-          </tr>
-          <tr>
-            <td>A1</td>
-            <?php foreach ($kelas as $value): ?>
-              <?php if ($value->ruang == "A1" && $value->tanggal == date("Y-m-d")): ?>
-                <?php for ($i=$value->jumlah_jam; $i >0 ; $i--): ?>
-                  <td>
-                    <?php echo $value->kelas; ?>
-                  </td>
-                <?php endfor; ?>
-              <?php endif; ?>
-            <?php endforeach; ?>
-          </tr>
-        </table>
 
-        <br>
+        <?php
+          if (isset($_GET['sub'])) {
+            $tanggal = $_GET['tgl'];
+          }else {
+            $tanggal = date("Y-m-d");
+          }
+          echo $tanggal;
+        ?>
 
-        <table border="1" class="jadwal-ruangan">
-          <tr>
-            <td>Ruangan</td>
-            <?php foreach ($kelas as $value): ?>
-              <?php if ($value->ruang == "B1" && $value->tanggal == date("Y-m-d")): ?>
-                <?php
-                  $jam = explode(":", $value->jam_masuk);
-                ?>
-                <?php for ($i=$value->jumlah_jam; $i >0 ; $i--): ?>
-                  <td>
-                    <?php
-                      echo $jam[0].":".$jam[1];
-                      $jam[0]++;
-                    ?>
-                  </td>
-                <?php endfor; ?>
-              <?php endif; ?>
-            <?php endforeach; ?>
-          </tr>
-          <tr>
-            <td>B1</td>
-            <?php foreach ($kelas as $value): ?>
-              <?php if ($value->ruang == "B1" && $value->tanggal == date("Y-m-d")): ?>
-                <?php for ($i=$value->jumlah_jam; $i >0 ; $i--): ?>
-                  <td>
-                    <?php echo $value->kelas; ?>
-                  </td>
-                <?php endfor; ?>
-              <?php endif; ?>
-            <?php endforeach; ?>
-          </tr>
-        </table> -->
+        <form action="" method="get">
+          <input type="date" name="tgl" />
+          <input type="submit" name="sub" value="submit">
+        </form>
+
         <table border="1" class="jadwal-ruangan" align="center">
           <tr>
-            <td>Ruang \ Jam</td>
-            <td>08:00</td>
-            <td>09:00</td>
-            <td>10:00</td>
-            <td>11:00</td>
-            <td>12:00</td>
-            <td>13:00</td>
-            <td>14:00</td>
-            <td>15:00</td>
-            <td>16:00</td>
-            <td>17:00</td>
-            <td>18:00</td>
+            <td>Jam \ Ruangan</td>
+            <td>A1</td>
+            <td>A2</td>
+            <td>A7</td>
+            <td>B1</td>
+            <td>B2</td>
+            <td>D2</td>
+            <td>D3</td>
+            <td>D5</td>
+            <td>E4</td>
+            <td>G2</td>
           </tr>
-          <?php foreach ($transaksi as $value): ?>
-            <tr>
-              <td>
-                <?php echo $value->kode ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "08:00:00"): ?>
+          <tr>
+            <td>08:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "08:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "09:00:00"): ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "08:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "10:00:00"): ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "08:00:00" && $value->kode == "A7" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "11:00:00"): ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "08:00:00" && $value->kode == "B1" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "12:00:00"): ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "08:00:00" && $value->kode == "B2" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "13:00:00"): ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "08:00:00" && $value->kode == "D2" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "14:00:00"): ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "08:00:00" && $value->kode == "D3" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "15:00:00"): ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "08:00:00" && $value->kode == "D5" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "16:00:00"): ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "08:00:00" && $value->kode == "E4" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "17:00:00"): ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "08:00:00" && $value->kode == "G2" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-              <td>
-                <?php if ($value->jam == "18:00:00"): ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
+          <tr>
+            <td>09:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "09:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
                   <?php echo $value->nama_kelas ?>
                 <?php endif; ?>
-              </td>
-            </tr>
-          <?php endforeach; ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "09:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
+          <tr>
+            <td>10:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "10:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "10:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
+          <tr>
+            <td>11:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "11:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "11:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
+          <tr>
+            <td>12:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "12:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "12:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
+          <tr>
+            <td>13:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "13:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "13:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
+          <tr>
+            <td>14:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "14:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "14:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
+          <tr>
+            <td>15:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "15:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "15:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
+          <tr>
+            <td>16:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "16:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "16:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
+          <tr>
+            <td>17:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "17:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "17:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
+          <tr>
+            <td>18:00</td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "18:00:00" && $value->kode == "A1" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+            <td>
+              <?php foreach ($transaksi as $value): ?>
+                <?php if ($value->jam == "18:00:00" && $value->kode == "A2" && $value->tanggal == $tanggal): ?>
+                  <?php echo $value->nama_kelas ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </td>
+          </tr>
         </table>
         <hr>
         PERATURAN PEMINJAMAN
