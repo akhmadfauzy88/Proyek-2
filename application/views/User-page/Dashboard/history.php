@@ -15,48 +15,7 @@
       </div>
       <div class="Con-body">
         KELAS PENGGANTI
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Ruangan</th>
-              <th>Jam Masuk</th>
-              <th>Jumlah Jam</th>
-              <th>Mata Kuliah</th>
-              <th>Kode Dosen</th>
-              <th>Tanggal</th>
-              <th>Kebutuhan Alat</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($kelas as $val): ?>
-              <tr>
-                <td><?php echo $val->ruang; ?></td>
-                <td><?php echo $val->jam_masuk; ?></td>
-                <td><?php echo $val->jumlah_jam; ?></td>
-                <td><?php echo $val->matakuliah; ?></td>
-                <td><?php echo $val->kode_dosen; ?></td>
-                <td><?php echo $val->tanggal; ?></td>
-                <td><?php echo $val->kebutuhan; ?></td>
-                <td><?php echo $val->status; ?></td>
-              </tr>
-            <?php endforeach; ?>
-            <!-- <tr>
-              <td>B1</td>
-              <td>10.30</td>
-              <td>3</td>
-              <td>Web Dasar</td>
-              <td>KVL</td>
-              <td>29 April 2018</td>
-              <td>-</td>
-            </tr> -->
-          </tbody>
-        </table>
-        <br>
-        <hr>
-        <br>
-        PRAKTIKUM
-        <div style="overflow:scroll;">
+        <div style="overflow:auto">
           <table class="table table-striped">
             <thead>
               <tr>
@@ -65,8 +24,47 @@
                 <th>Jumlah Jam</th>
                 <th>Mata Kuliah</th>
                 <th>Kode Dosen</th>
-                <th>Koordinator Praktikum</th>
-                <th>Jumlah Assistant</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($kelas as $val): ?>
+                <tr>
+                  <td><?php echo $val->kode; ?></td>
+                  <td><?php echo $val->jam_masuk; ?></td>
+                  <td><?php echo $val->jumlah_jam; ?></td>
+                  <td><?php echo $val->matakuliah; ?></td>
+                  <td><?php echo $val->kdosen; ?></td>
+                  <td><?php echo $val->tanggal; ?></td>
+                  <td><?php echo $val->status; ?></td>
+                </tr>
+              <?php endforeach; ?>
+              <!-- <tr>
+                <td>B1</td>
+                <td>10.30</td>
+                <td>3</td>
+                <td>Web Dasar</td>
+                <td>KVL</td>
+                <td>29 April 2018</td>
+                <td>-</td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+        <br>
+        <hr>
+        <br>
+        PRAKTIKUM
+        <div style="overflow:auto;">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Ruangan</th>
+                <th>Jam Masuk</th>
+                <th>Jumlah Jam</th>
+                <th>Mata Kuliah</th>
+                <th>Kode Dosen</th>
                 <th>Tanggal</th>
                 <th>Kebutuhan Alat</th>
                 <th>Bukti Perizinan</th>
@@ -76,13 +74,11 @@
             <tbody>
               <?php foreach ($praktikum as $val): ?>
                 <tr>
-                  <td><?php echo $val->ruang; ?></td>
+                  <td><?php echo $val->kode; ?></td>
                   <td><?php echo $val->jam_masuk; ?></td>
                   <td><?php echo $val->jumlah_jam; ?></td>
                   <td><?php echo $val->matakuliah; ?></td>
-                  <td><?php echo $val->kode_dosen; ?></td>
-                  <td><?php echo $val->koor; ?></td>
-                  <td><?php echo $val->jml_asprak; ?></td>
+                  <td><?php echo $val->kdosen; ?></td>
                   <td><?php echo $val->tanggal; ?></td>
                   <td><?php echo $val->kebutuhan; ?></td>
                   <td><?php echo $val->bukti; ?></td>

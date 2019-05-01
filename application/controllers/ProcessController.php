@@ -90,14 +90,15 @@ class ProcessController extends CI_Controller {
 		$pinjamruangan = $this->input->post("pinjamruangan");
 		$matakuliah = $this->input->post("matakuliah");
 		$kode_dosen = $this->input->post("kode_dosen");
-		$koor = $this->input->post("koor");
-		$jml_asprak = $this->input->post("jml_asprak");
 		$tanggal = $this->input->post("tanggal");
 		$kebutuhan = $this->input->post("kebutuhan");
 		$bukti = $this->input->post("bukti");
 
+		// echo $kode_dosen;
+		// die();
+
 		$this->load->model('InputDataModel');
-		$this->InputDataModel->input_data_praktikum($nama, $kelas, $ruang, $jam_masuk, $pinjamruangan, $matakuliah, $kode_dosen, $koor, $jml_asprak, $tanggal, $kebutuhan, $bukti);
+		$this->InputDataModel->input_data_praktikum($nama, $kelas, $ruang, $jam_masuk, $pinjamruangan, $kode_dosen, $matakuliah, $tanggal, $kebutuhan, $bukti);
 		$this->session->set_flashdata('log_praktikum', 'TRUE');
 		redirect(base_url("Status"));
 	}

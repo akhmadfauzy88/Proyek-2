@@ -57,7 +57,7 @@
           <tbody>
             <?php foreach ($kelas as $val): ?>
               <tr>
-                <td><?php echo $val->kode; ?></td>
+                <td><?php echo $val->ruang; ?></td>
                 <td><?php echo $val->jam_masuk; ?></td>
                 <td><?php echo $val->jumlah_jam; ?></td>
                 <td><?php echo $val->matakuliah; ?></td>
@@ -94,8 +94,6 @@
               <th>Jumlah Jam</th>
               <th>Mata Kuliah</th>
               <th>Kode Dosen</th>
-              <th>Koordinator Assistant</th>
-              <th>Jumlah Assistant</th>
               <th>Tanggal</th>
               <th>Kebutuhan Alat</th>
               <th>Bukti Peminjaman</th>
@@ -105,13 +103,11 @@
           <tbody>
             <?php foreach ($praktikum as $val): ?>
               <tr>
-                <td><?php echo $val->ruangan; ?></td>
+                <td><?php echo $val->ruang; ?></td>
                 <td><?php echo $val->jam_masuk; ?></td>
                 <td><?php echo $val->jumlah_jam; ?></td>
                 <td><?php echo $val->matakuliah; ?></td>
-                <td><?php echo $val->kode_dosen; ?></td>
-                <td><?php echo $val->koor; ?></td>
-                <td><?php echo $val->jml_asprak; ?></td>
+                <td><?php echo $val->kdosen; ?></td>
                 <td><?php echo $val->tanggal; ?></td>
                 <td><?php echo $val->kebutuhan; ?></td>
                 <td><?php echo $val->bukti; ?></td>

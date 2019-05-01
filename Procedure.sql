@@ -20,10 +20,10 @@ delimiter ;
 delimiter //
 create or replace procedure history_kelas(id int)
 	begin
-	select *, kode_dosen as kdosen
+	select *, dosen.kode as kdosen
 	from transaksi join dosen on transaksi.kode_dosen = dosen.id
   join laboratory on transaksi.ruangan = laboratory.id
-	where status = 'Attended' OR status = 'Canceled' AND peminjam = id;
+	where (status = 'attended' OR status = 'canceled') AND keterangan = 'kelas' AND peminjam = id;
 	end //
 delimiter ;
 
@@ -40,7 +40,7 @@ delimiter ;
 delimiter //
 create or replace procedure history_praktikum(id int)
   begin
-  select *, kode_dosen as kdosen
+  select *, dosen.kode as kdosen
   from transaksi join dosen on transaksi.kode_dosen = dosen.id
   join laboratory on transaksi.ruangan = laboratory.id
   where status = 'Canceled' OR status = 'Attended' AND keterangan = 'Praktikum' AND peminjam = id;

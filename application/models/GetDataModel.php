@@ -37,39 +37,66 @@ class GetDataModel extends CI_Model {
     //                                   'peminjam' => $peminjam,
     //                                   'status ' => 'pending'
     //                                 ));
-    $id = $_SESSION['id'];
-    $query = $this->db->query("call statuspinjam_kelas($id)");
+    //$id = $_SESSION['id'];
+    $query = $this->db->query("call statuspinjam_kelas($peminjam)");
     $data = $query->result();
+
+    $query->next_result();
+    $query->free_result();
+
     return $data;
   }
 
   public function get_history_kelas($peminjam){
-    $query = $this->db->get_where('transaksi_kelas',
-                                    array(
-                                      'peminjam' => $peminjam,
-                                      'status !=' => 'pending'
-                                    ));
+    // $query = $this->db->get_where('transaksi_kelas',
+    //                                 array(
+    //                                   'peminjam' => $peminjam,
+    //                                   'status !=' => 'pending'
+    //                                 ));
+
+    $query = $this->db->query("call history_kelas($peminjam)");
     $data = $query->result();
+
+    $query->next_result();
+    $query->free_result();
+
     return $data;
   }
 
   public function get_status_praktikum($peminjam){
-    $query = $this->db->get_where('transaksi_praktikum',
-                                    array(
-                                      'peminjam' => $peminjam,
-                                      'status ' => 'pending'
-                                    ));
-    $data = $query->result();
-    return $data;
+     // $query = $this->db->get_where('transaksi',
+     //                                 array(
+     //                                   'peminjam' => $peminjam,
+     //                                   'status ' => 'pending'
+     //                                 ));
+    //$id = $_SESSION['id'];
+    $query = $this->db->query("call statuspinjam_praktikum($peminjam)");
+    $datax = $query->result();
+    //
+    // //add this two line
+    $query->next_result();
+    $query->free_result();
+    //end of new code
+
+    return $datax;
   }
 
   public function get_history_praktikum($peminjam){
-    $query = $this->db->get_where('transaksi_praktikum',
-                                    array(
-                                      'peminjam' => $peminjam,
-                                      'status !=' => 'pending'
-                                    ));
+    // $query = $this->db->get_where('transaksi_praktikum',
+    //                                 array(
+    //                                   'peminjam' => $peminjam,
+    //                                   'status !=' => 'pending'
+    //                                 ));
+
+
+    $query = $this->db->query("call history_praktikum($peminjam)");
     $data = $query->result();
+
+    $query->next_result();
+    $query->free_result();
+
+    $data = $query->result();
+
     return $data;
   }
 

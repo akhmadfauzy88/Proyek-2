@@ -65,7 +65,6 @@
           </select>
           <label for="">Tanggal</label>
           <input type="date" name="tanggal" value="" class="form-control" required>
-          <label for="">Kebutuhan Alat</label>
           <input type="submit" name="submit" value="SUBMIT" class="btn btn-block btn-success" style="margin-top:10px;">
         </form>
       </div>

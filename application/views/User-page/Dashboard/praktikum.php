@@ -20,8 +20,8 @@
           <label for="">Ruangan</label>
           <select class="form-control" name="ruang" required>
             <?php foreach ($kelas as $val): ?>
-              <?php if ($val->lab_name != "-"): ?>
-                <option value="<?php echo $val->lab_name; ?>"><?php echo $val->nama." - ".$val->lab_name; ?></option>
+              <?php if ($val->kode != "-"): ?>
+                <option value="<?php echo $val->id; ?>"><?php echo $val->kode." - ".$val->nama; ?></option>
               <?php endif; ?>
             <?php endforeach; ?>
           </select>
@@ -60,13 +60,9 @@
           <label for="">Kode Dosen</label>
           <select class="form-control" name="kode_dosen" required>
             <?php foreach ($dosen as $val): ?>
-              <option value="<?php echo $val->kode; ?>"><?php echo $val->nama_depan." ".$val->nama_belakang." - ".$val->kode; ?></option>
+              <option value="<?php echo $val->id; ?>"><?php echo $val->nama_depan." ".$val->nama_belakang." - ".$val->kode; ?></option>
             <?php endforeach; ?>
           </select>
-          <label for="">Koordinator Praktikum</label>
-          <input type="text" name="koor" value="" class="form-control" required>
-          <label for="">Jumlah Assistant</label>
-          <input type="text" name="jml_asprak" value="" class="form-control" required>
           <label for="">Tanggal</label>
           <input type="date" name="tanggal" value="" class="form-control" required>
           <label for="">Kebutuhan Alat</label>
