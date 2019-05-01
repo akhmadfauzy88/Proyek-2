@@ -30,7 +30,7 @@ class InputDataModel extends CI_Model {
     $jm = $jam_masuk;
 
     if ($pinjamruangan > 1) {
-      for($i=1;$i<$pinjamruangan;$i++){
+      for($i=1;$i<=$pinjamruangan;$i++){
         $tambahjam = strtotime($jm) + 60*60;
         $jm = date('H:i:s', $tambahjam);
         $dat = array(
