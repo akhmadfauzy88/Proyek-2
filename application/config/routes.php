@@ -73,3 +73,5 @@ $route["pinjam_kelas"] = "ProcessController/input_transaksi_kelas";
 $route["pinjam_praktikum"] = "ProcessController/input_transaksi_praktikum";
 $route["cancel_kelas"] = "ProcessController/cancel_transaksi_kelas";
 $route["cancel_praktikum"] = "ProcessController/cancel_transaksi_praktikum";
+
+$route["respon"] = "AdminController/terima_request";

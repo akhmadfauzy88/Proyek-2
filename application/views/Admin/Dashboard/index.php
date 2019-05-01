@@ -20,7 +20,7 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                             <div class="text">
-                                                <h2><?php echo $jml_penjadwalan['jml'] ?></h2>
+                                                <h2><?php echo $jml_penjadwalan['total'] ?></h2>
                                                 <span>Total Peminjaman</span>
                                             </div>
                                             <div class="overview-chart">
@@ -38,7 +38,7 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                             <div class="text">
-                                                <h2><?php echo $jml_penjadwalan_kelas['jml_kelas'] ?></h2>
+                                                <h2><?php echo $jml_penjadwalan_praktikum['praktikum'] ?></h2>
                                                 <span>Peminjaman - Praktikum</span>
                                             </div>
                                         </div>
@@ -56,7 +56,7 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                             <div class="text">
-                                                <h2><?php echo $jml_penjadwalan_kelas['jml_kelas'] ?></h2>
+                                                <h2><?php echo $jml_penjadwalan_kelas['kelas'] ?></h2>
                                                 <span>Peminjaman - kelas</span>
                                             </div>
                                             <div class="overview-chart">
@@ -69,7 +69,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-9">
-                                <h2 class="title-1 m-b-25">Daftar Peminjaman - Praktikum</h2>
+                                <h2 class="title-1 m-b-25">Daftar Peminjaman - Kelas Pengganti</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
@@ -79,41 +79,29 @@
                                               <th>Jumlah Jam</th>
                                               <th>Mata Kuliah</th>
                                               <th>Kode Dosen</th>
-                                              <th>Koordinator Praktikum</th>
-                                              <th>Jumlah Assistant</th>
                                               <th>Tanggal</th>
-                                              <th>Kebutuhan Alat</th>
                                               <th>Action</th>
-                                                <!-- <th>Ruangan</th>
-                                                <th>order ID</th>
-                                                <th>name</th>
-                                                <th class="text-right">price</th>
-                                                <th class="text-right">quantity</th>
-                                                <th class="text-right">total</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                              <td>B1</td>
-                                              <td>16.30</td>
-                                              <td>3</td>
-                                              <td>Alpro</td>
-                                              <td>MKL</td>
-                                              <td>Sinta</td>
-                                              <td>5</td>
-                                              <td>17 Mei 2019</td>
-                                              <td>Komputer</td>
-                                              <td>
-                                                <button type="button" name="button" class="btn btn-success">Terima</button>
-                                                <button type="button" name="button" class="btn btn-danger">Tolak</button>
-                                              </td>
-                                                <!-- <td>2018-09-29 05:57</td>
-                                                <td>100398</td>
-                                                <td>iPhone X 64Gb Grey</td>
-                                                <td class="text-right">$999.00</td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right">$999.00</td> -->
-                                            </tr>
+                                            <?php foreach ($transaksi_kelas as $value): ?>
+                                              <tr>
+                                                <td><?php echo $value->kode ?></td>
+                                                <td><?php echo $value->jam_masuk ?></td>
+                                                <td><?php echo $value->jumlah_jam ?></td>
+                                                <td><?php echo $value->matakuliah ?></td>
+                                                <td><?php echo $value->kdosen ?></td>
+                                                <td><?php echo $value->tanggal ?></td>
+                                                <td>
+                                                  <form action="<?php echo base_url() ?>respon" method="post">
+                                                    <input type="hidden" name="id" value="<?php echo $value->idx ?>" />
+                                                    <input type="hidden" name="status" value="kelas" />
+                                                    <input type="submit" name="terima" value="Terima" class="btn btn-success" />
+                                                    <input type="submit" name="tolak" value="Tolak" class="btn btn-danger" />
+                                                  </form>
+                                                </td>
+                                              </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -146,7 +134,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-9">
-                                <h2 class="title-1 m-b-25">Daftar Peminjaman - Kelas Pengganti</h2>
+                                <h2 class="title-1 m-b-25">Daftar Peminjaman - Praktikum</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
@@ -158,35 +146,31 @@
                                               <th>Kode Dosen</th>
                                               <th>Tanggal</th>
                                               <th>Kebutuhan Alat</th>
+                                              <th>Bukti Peminjaman</th>
                                               <th>Action</th>
-                                                <!-- <th>date</th>
-                                                <th>order ID</th>
-                                                <th>name</th>
-                                                <th class="text-right">price</th>
-                                                <th class="text-right">quantity</th>
-                                                <th class="text-right">total</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
+                                          <?php foreach ($transaksi_praktikum as $value): ?>
                                             <tr>
-                                              <td>B1</td>
-                                              <td>10.30</td>
-                                              <td>3</td>
-                                              <td>Web Dasar</td>
-                                              <td>KVL</td>
-                                              <td>29 April 2018</td>
-                                              <td>-</td>
+                                              <td><?php echo $value->kode ?></td>
+                                              <td><?php echo $value->jam_masuk ?></td>
+                                              <td><?php echo $value->jumlah_jam ?></td>
+                                              <td><?php echo $value->matakuliah ?></td>
+                                              <td><?php echo $value->kdosen ?></td>
+                                              <td><?php echo $value->tanggal ?></td>
+                                              <td><?php echo $value->kebutuhan ?></td>
+                                              <td><?php echo $value->bukti ?></td>
                                               <td>
-                                                <button type="button" class="btn btn-success" name="button">Terima</button>
-                                                <button type="button" class="btn btn-danger" name="button">Tolak</button>
+                                                <form action="<?php echo base_url() ?>respon" method="post">
+                                                  <input type="hidden" name="id" value="<?php echo $value->idx ?>" />
+                                                  <input type="hidden" name="status" value="praktikum" />
+                                                  <input type="submit" name="terima" value="Terima" class="btn btn-success" />
+                                                  <input type="submit" name="tolak" value="Tolak" class="btn btn-danger" />
+                                                </form>
                                               </td>
-                                                <!-- <td>2018-09-29 05:57</td>
-                                                <td>100398</td>
-                                                <td>iPhone X 64Gb Grey</td>
-                                                <td class="text-right">$999.00</td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right">$999.00</td> -->
                                             </tr>
+                                          <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>

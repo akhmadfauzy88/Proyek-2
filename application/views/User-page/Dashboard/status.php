@@ -51,6 +51,7 @@
               <th>Mata Kuliah</th>
               <th>Kode Dosen</th>
               <th>Tanggal</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -63,6 +64,7 @@
                 <td><?php echo $val->matakuliah; ?></td>
                 <td><?php echo $val->kdosen; ?></td>
                 <td><?php echo $val->tanggal; ?></td>
+                <td><?php echo $val->status; ?></td>
                 <td>
                   <a href="#" class="btn btn-danger" onclick="batalkan_kelas(<?php echo $val->t_id; ?>)">Batalkan</a>
                 </td>
@@ -97,6 +99,7 @@
               <th>Tanggal</th>
               <th>Kebutuhan Alat</th>
               <th>Bukti Peminjaman</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -111,6 +114,7 @@
                 <td><?php echo $val->tanggal; ?></td>
                 <td><?php echo $val->kebutuhan; ?></td>
                 <td><?php echo $val->bukti; ?></td>
+                <td><?php echo $val->status; ?></td>
                 <td>
                   <a href="#" class="btn btn-danger" onclick="batalkan_praktikum(<?php echo $val->t_id; ?>)">Batalkan</a>
                 </td>
