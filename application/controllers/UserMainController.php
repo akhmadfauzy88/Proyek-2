@@ -22,7 +22,7 @@ class UserMainController extends CI_Controller {
 
 		$this->load->model('GetDataModel');
 		$status['kelas'] = $this->GetDataModel->get_status_kelas($id);
-		$status['praktikum'] = $this->GetDataModel->get_status_praktikum($id);
+		//$status['praktikum'] = $this->GetDataModel->get_status_praktikum($id);
 
     $data['judul'] = "Status Peminjaman";
     $data['css'] = base_url()."Assets/Users/Css/main.css";

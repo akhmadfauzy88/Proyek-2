@@ -29,21 +29,26 @@ class InputDataModel extends CI_Model {
 
     $jm = $jam_masuk;
 
-    // echo $jm;
-    // die();
-
-    for($i=0;$i<$pinjamruangan;$i++){
-      $tambahjam = strtotime($jm) + 60*60;
-      $jm = date('H:i:s', $tambahjam);
+    if ($pinjamruangan > 1) {
+      for($i=1;$i<$pinjamruangan;$i++){
+        $tambahjam = strtotime($jm) + 60*60;
+        $jm = date('H:i:s', $tambahjam);
+        $dat = array(
+          'tanggal' => $tanggal,
+          'jam' => $jm,
+          'ruang' => $ruang,
+          'kelas' => $kelas
+        );
+        $this->db->insert('penjadwalan', $dat);
+      }
+    }else{
       $dat = array(
         'tanggal' => $tanggal,
-        'jam' => $jm,
+        'jam' => $jam_masuk,
         'ruang' => $ruang,
         'kelas' => $kelas
       );
-
       $this->db->insert('penjadwalan', $dat);
-
     }
 
     $this->db->insert('transaksi', $data);
