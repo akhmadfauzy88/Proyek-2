@@ -18,8 +18,8 @@ class GetDataModel extends CI_Model {
   // }
 
   public function get_data_kelas(){
-    $this->db->select('id, kode, nama');
-    $query = $this->db->get('laboratory');
+
+    $query = $this->db->query('call list_lab()');
     $data = $query->result();
     return $data;
   }

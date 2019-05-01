@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2019 at 03:39 PM
+-- Generation Time: May 01, 2019 at 05:43 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -29,16 +29,42 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `dashboard` ()  begin
 select * from penjadwalan
 join laboratory on penjadwalan.ruang = laboratory.id
-join kelas on penjadwalan.kelas = kelas.id;
+join kelas on penjadwalan.kelas = kelas.id
+WHERE penjadwalan.status != 'canceled';
 end$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `history_kelas` (`id` INT)  begin
+	select *, dosen.kode as kdosen
+	from transaksi join dosen on transaksi.kode_dosen = dosen.id
+  join laboratory on transaksi.ruangan = laboratory.id
+	where (status = 'attended' OR status = 'canceled') AND keterangan = 'kelas' AND peminjam = id;
+	end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `history_praktikum` (IN `id` INT)  begin
+  select *, dosen.kode as kdosen
+  from transaksi join dosen on transaksi.kode_dosen = dosen.id
+  join laboratory on transaksi.ruangan = laboratory.id
+  where (status = 'canceled' OR status = 'attended') AND keterangan = 'praktikum' AND peminjam = id;
+  end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `list_lab` ()  begin
+    select * from laboratory;
+  end$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `statuspinjam_kelas` (IN `uname` VARCHAR(32))  begin
-select *, dosen.kode as kdosen
+select *, laboratory.kode as ruang, dosen.kode as kdosen
 from transaksi
 join laboratory on transaksi.ruangan = laboratory.id
 join dosen on transaksi.kode_dosen = dosen.id
-where status = 'Pending' OR status = 'Approved' AND peminjam = uname;
+where (status = 'Pending' OR status = 'Approved') AND keterangan = 'kelas' AND peminjam = uname;
 end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `statuspinjam_praktikum` (IN `uname` VARCHAR(32))  begin
+  select *, laboratory.kode as ruang, dosen.kode as kdosen
+  from transaksi join dosen on transaksi.kode_dosen = dosen.id
+  join laboratory on transaksi.ruangan = laboratory.id
+  where (status = 'Pending' OR status = 'Approved') AND (keterangan = 'praktikum' AND peminjam = uname);
+  end$$
 
 DELIMITER ;
 
@@ -164,16 +190,21 @@ CREATE TABLE `penjadwalan` (
   `tanggal` date NOT NULL,
   `jam` time NOT NULL,
   `ruang` int(11) NOT NULL,
-  `kelas` int(11) NOT NULL
+  `kelas` int(11) NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `penjadwalan`
 --
 
-INSERT INTO `penjadwalan` (`id`, `tanggal`, `jam`, `ruang`, `kelas`) VALUES
-(1, '2019-05-01', '09:00:00', 2, 1),
-(2, '2019-05-01', '10:00:00', 2, 1);
+INSERT INTO `penjadwalan` (`id`, `tanggal`, `jam`, `ruang`, `kelas`, `status`) VALUES
+(12, '2019-05-01', '08:00:00', 3, 1, 'canceled'),
+(13, '2019-05-01', '09:00:00', 3, 1, 'canceled'),
+(14, '2019-05-01', '10:00:00', 3, 1, 'canceled'),
+(15, '2019-05-01', '08:00:00', 3, 1, 'canceled'),
+(16, '2019-05-01', '09:00:00', 3, 1, 'canceled'),
+(17, '2019-05-01', '10:00:00', 3, 1, 'canceled');
 
 -- --------------------------------------------------------
 
@@ -214,7 +245,8 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `peminjam`, `ruangan`, `jam_masuk`, `jumlah_jam`, `matakuliah`, `kode_dosen`, `tanggal`, `kebutuhan`, `bukti`, `status`, `keterangan`) VALUES
-(1, 1, 2, '08:00:00', 3, 'Sql', 1, '2019-05-01', NULL, NULL, 'pending', 'kelas');
+(6, 1, 3, '08:00:00', 3, 'Sql', 1, '2019-05-01', 'fghrg', '1.1.jpeg', 'canceled', 'praktikum'),
+(7, 1, 3, '08:00:00', 3, 'SS', 1, '2019-05-01', NULL, NULL, 'canceled', 'kelas');
 
 --
 -- Indexes for dumped tables
@@ -267,7 +299,8 @@ ALTER TABLE `mhs`
 ALTER TABLE `penjadwalan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `ruang` (`ruang`),
-  ADD KEY `kelas` (`kelas`);
+  ADD KEY `kelas` (`kelas`),
+  ADD KEY `status` (`status`);
 
 --
 -- Indexes for table `pesan`
@@ -284,7 +317,8 @@ ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id`),
   ADD KEY `peminjam` (`peminjam`),
   ADD KEY `ruangan` (`ruangan`),
-  ADD KEY `kode_dosen` (`kode_dosen`);
+  ADD KEY `kode_dosen` (`kode_dosen`),
+  ADD KEY `status` (`status`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -324,7 +358,7 @@ ALTER TABLE `mhs`
 -- AUTO_INCREMENT for table `penjadwalan`
 --
 ALTER TABLE `penjadwalan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `pesan`
@@ -336,7 +370,7 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -365,7 +399,8 @@ ALTER TABLE `mhs`
 --
 ALTER TABLE `penjadwalan`
   ADD CONSTRAINT `penjadwalan_ibfk_1` FOREIGN KEY (`kelas`) REFERENCES `kelas` (`id`),
-  ADD CONSTRAINT `penjadwalan_ibfk_2` FOREIGN KEY (`ruang`) REFERENCES `laboratory` (`id`);
+  ADD CONSTRAINT `penjadwalan_ibfk_2` FOREIGN KEY (`ruang`) REFERENCES `laboratory` (`id`),
+  ADD CONSTRAINT `penjadwalan_ibfk_3` FOREIGN KEY (`status`) REFERENCES `transaksi` (`status`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pesan`

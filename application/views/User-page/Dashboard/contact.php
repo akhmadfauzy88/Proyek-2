@@ -83,7 +83,7 @@
 								<select class="input1" name="subject">
 									<?php foreach ($kelas as $val): ?>
 										<?php if ($val->lab_name != "-"): ?>
-				              <option value="<?php echo $val->lab_name; ?>"><?php echo $val->nama." - ".$val->lab_name; ?></option>
+				              <option value="<?php echo $val->id; ?>"><?php echo $val->nama." - ".$val->kode; ?></option>
 				            <?php endif; ?>
 									<?php endforeach; ?>
 								</select>
