@@ -53,3 +53,60 @@ create or replace procedure list_lab()
     select * from laboratory
   end //
 delimiter ;
+
+delimiter //
+create or replace procedure request_kelas()
+  begin
+    select *, kode_dosen as kdosen
+    from transaksi join dosen on transaksi.kode_dosen = dosen.id
+    join laboratory on transaksi.ruangan = laboratory.id
+    where status = 'pending' and keterangan = 'kelas';
+  end //
+delimiter ;
+
+delimiter //
+create or replace procedure request_prakt()
+  begin
+    select *, kode_dosen as kdosen
+    from transaksi join dosen on transaksi.kode_dosen = dosen.id
+    join laboratory on transaksi.ruangan = laboratory.id
+    where status = 'pending' and keterangan = 'praktikum';
+  end //
+delimiter ;
+
+
+
+delimiter //
+create or replace function fpinjam(ket varchar(30)) returns int(3)
+	deterministic
+	begin
+	declare total_peminjaman int;
+
+	select count(id) into total_peminjaman
+	from transaksi
+	where keterangan = ket;
+
+	return(total_peminjaman);
+
+	end //
+delimiter ;
+
+select fpinjam('kelas');
+
+select fpinjam('praktikum');
+
+delimiter //
+create or replace function ftotpinjam() returns int(3)
+	deterministic
+	begin
+	declare total_peminjaman int;
+
+	select count(id) into total_peminjaman
+	from transaksi;
+
+	return(total_peminjaman);
+
+	end //
+delimiter ;
+
+select ftotpinjam();
