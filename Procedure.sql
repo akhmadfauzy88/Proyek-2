@@ -110,3 +110,27 @@ create or replace function ftotpinjam() returns int(3)
 delimiter ;
 
 select ftotpinjam();
+
+-- TRIGGER
+create or replace table dosenlab_history(
+	lab_name varchar(50),
+	tgl_ubah date,
+	old_pemb int,
+	new_pemb int,
+	information varchar(20)
+);
+
+delimiter //
+create or replace trigger afterupdate_lab
+ 	after update on laboratory
+ 	for each row
+begin
+ 	insert into dosenlab_history
+ 	set
+ 	lab_name = OLD.kode,
+ 	tgl_ubah = now(),
+ 	old_pemb = OLD.id,
+ 	new_pemb = NEW.id,
+ 	information = 'CHANGE';
+ end //
+delimiter ;
