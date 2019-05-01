@@ -46,3 +46,10 @@ create or replace procedure history_praktikum(id int)
   where status = 'Canceled' OR status = 'Attended' AND keterangan = 'Praktikum' AND peminjam = id;
   end //
 delimiter ;
+
+delimiter //
+create or replace procedure list_lab()
+  begin
+    select * from laboratory
+  end //
+delimiter ;
