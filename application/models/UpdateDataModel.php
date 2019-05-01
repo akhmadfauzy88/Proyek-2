@@ -6,7 +6,7 @@ class UpdateDataModel extends CI_Model {
     );
 
     $this->db->where('id', $id);
-    $this->db->update('transaksi_kelas', $data);
+    $this->db->update('transaksi', $data);
   }
 
   public function update_data_praktikum($id){

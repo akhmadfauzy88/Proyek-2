@@ -21,6 +21,10 @@ class GetDataModel extends CI_Model {
 
     $query = $this->db->query('call list_lab()');
     $data = $query->result();
+
+    $query->next_result();
+    $query->free_result();
+
     return $data;
   }
 

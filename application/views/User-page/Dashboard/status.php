@@ -64,7 +64,7 @@
                 <td><?php echo $val->kdosen; ?></td>
                 <td><?php echo $val->tanggal; ?></td>
                 <td>
-                  <a href="#" class="btn btn-danger" onclick="batalkan_kelas(<?php echo $val->id; ?>)">Batalkan</a>
+                  <a href="#" class="btn btn-danger" onclick="batalkan_kelas(<?php echo $val->t_id; ?>)">Batalkan</a>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -112,7 +112,7 @@
                 <td><?php echo $val->kebutuhan; ?></td>
                 <td><?php echo $val->bukti; ?></td>
                 <td>
-                  <a href="#" class="btn btn-danger" onclick="batalkan_praktikum(<?php echo $val->id; ?>)">Batalkan</a>
+                  <a href="#" class="btn btn-danger" onclick="batalkan_praktikum(<?php echo $val->t_id; ?>)">Batalkan</a>
                 </td>
               </tr>
             <?php endforeach; ?>

@@ -74,10 +74,7 @@
 								<span class="shadow-input1"></span>
 							</div>
 
-							<div class="wrap-input1 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-								<input class="input1" type="text" name="email" placeholder="Email" id="email" value="<?php echo $_SESSION['email']; ?>">
-								<span class="shadow-input1"></span>
-							</div>
+							<input type="hidden" name="user" value="<?php echo $_SESSION['id']; ?>">
 
 							<div class="wrap-input1 validate-input" data-validate = "Subject is required">
 								<select class="input1" name="subject">

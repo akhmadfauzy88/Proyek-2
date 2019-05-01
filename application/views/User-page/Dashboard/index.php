@@ -13,7 +13,7 @@
     <div class="col-8" style="margin-top: 15px;">
 
       <div class="Heading">
-        JADWAL PEMINJAMAN <?php echo $_SESSION['kelas']; ?>
+        JADWAL PEMINJAMAN 
       </div>
       <div class="Con-body">
         <form class="" action="<?php echo base_url();?>pinjam" method="post">

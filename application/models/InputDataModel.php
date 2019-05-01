@@ -1,9 +1,8 @@
 <?php
 class InputDataModel extends CI_Model {
-  public function input_data_pesan($nama, $email, $subject, $pesan){
+  public function input_data_pesan($user, $subject, $pesan){
     $data = array(
-        'nama' => $nama,
-        'email' => $email,
+        'user' => $user,
         'subject' => $subject,
         'pesan' => $pesan
     );

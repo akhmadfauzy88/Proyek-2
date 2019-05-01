@@ -17,37 +17,37 @@
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
+                                                <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>2300</h2>
-                                                <span>total peminjaman</span>
+                                                <h2><?php echo $jml_penjadwalan['jml'] ?></h2>
+                                                <span>Total Peminjaman</span>
                                             </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
+                                            <div class="overview-chart">
+                                                <!-- <canvas id="widgetChart4"></canvas> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item- -c2">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c2">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
+                                                <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>388,688</h2>
-                                                <span>items solid</span>
+                                                <h2><?php echo $jml_penjadwalan_kelas['jml_kelas'] ?></h2>
+                                                <span>Peminjaman - Praktikum</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
+                                            <!-- <canvas id="widgetChart2"></canvas> -->
                                         </div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c3">
                                     <div class="overview__inner">
@@ -56,30 +56,12 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>23</h2>
-                                                <span>peminjaman minggu ini</span>
+                                                <h2><?php echo $jml_penjadwalan_kelas['jml_kelas'] ?></h2>
+                                                <span>Peminjaman - kelas</span>
                                             </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <!-- <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div> -->
-                                            <div class="text">
-                                                <h2>Laboratory</h2>
-                                                <span>Software</span>
+                                            <div class="overview-chart">
+                                                <!-- <canvas id="widgetChart4"></canvas> -->
                                             </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <!-- <canvas id="widgetChart4"></canvas> -->
                                         </div>
                                     </div>
                                 </div>

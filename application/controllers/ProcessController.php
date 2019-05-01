@@ -35,13 +35,13 @@ class ProcessController extends CI_Controller {
 	}
 
 	public function input_pesan(){
-		$nama = $this->input->post("nama");
-		$email = $this->input->post("email");
+		//$nama = $this->input->post("nama");
+		$user = $this->input->post("user");
 		$subject = $this->input->post("subject");
 		$pesan = $this->input->post("pesan");
 
 		$this->load->model('InputDataModel');
-		$this->InputDataModel->input_data_pesan($nama, $email, $subject, $pesan);
+		$this->InputDataModel->input_data_pesan($user, $subject, $pesan);
 		$this->session->set_flashdata('log_pesan', 'TRUE');
 		redirect(base_url("Contact"));
 	}

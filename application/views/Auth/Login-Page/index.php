@@ -7,8 +7,10 @@
 	$error = $this->session->flashdata('error');
   $error_page = $this->session->flashdata('error_page');
 
-  if($login){
+  if($login && $_SESSION['nama'] != "lak"){
 		redirect(base_url("Dashboard"));
+  }elseif ($login && $_SESSION['nama'] == "lak") {
+    redirect(base_url("Admin/Dashboard"));
   }else{
 
   }
