@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2019 at 05:43 PM
+-- Generation Time: May 02, 2019 at 04:26 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -51,20 +51,69 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `list_lab` ()  begin
     select * from laboratory;
   end$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `list_transaksi` ()  NO SQL
+begin
+    select COUNT(*) as jml from transaksi;
+  end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `list_transaksi_kelas` ()  NO SQL
+begin
+    select COUNT(*) as jml_kelas from transaksi
+    where keterangan = 'kelas';
+  end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `request_kelas` ()  begin
+    select *, dosen.kode as kdosen, transaksi.id as idx
+    from transaksi join dosen on transaksi.kode_dosen = dosen.id
+    join laboratory on transaksi.ruangan = laboratory.id
+    where status = 'pending' and keterangan = 'kelas';
+  end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `request_prakt` ()  begin
+    select *, dosen.kode as kdosen, transaksi.id as idx
+    from transaksi join dosen on transaksi.kode_dosen = dosen.id
+    join laboratory on transaksi.ruangan = laboratory.id
+    where status = 'pending' and keterangan = 'praktikum';
+  end$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `statuspinjam_kelas` (IN `uname` VARCHAR(32))  begin
-select *, laboratory.kode as ruang, dosen.kode as kdosen
+select *, transaksi.id as t_id, laboratory.kode as ruang, dosen.kode as kdosen
 from transaksi
 join laboratory on transaksi.ruangan = laboratory.id
 join dosen on transaksi.kode_dosen = dosen.id
-where (status = 'Pending' OR status = 'Approved') AND keterangan = 'kelas' AND peminjam = uname;
+where (status = 'pending' OR status = 'approved') AND keterangan = 'kelas' AND peminjam = uname;
 end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `statuspinjam_praktikum` (IN `uname` VARCHAR(32))  begin
-  select *, laboratory.kode as ruang, dosen.kode as kdosen
+  select *, transaksi.id as t_id, laboratory.kode as ruang, dosen.kode as kdosen
   from transaksi join dosen on transaksi.kode_dosen = dosen.id
   join laboratory on transaksi.ruangan = laboratory.id
-  where (status = 'Pending' OR status = 'Approved') AND (keterangan = 'praktikum' AND peminjam = uname);
+  where (status = 'pending' OR status = 'approved') AND (keterangan = 'praktikum' AND peminjam = uname);
   end$$
+
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `fpinjam` (`ket` VARCHAR(30)) RETURNS INT(3) begin
+	declare total_peminjaman int;
+
+	select count(id) into total_peminjaman
+	from transaksi
+	where keterangan = ket;
+
+	return(total_peminjaman);
+
+	end$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `ftotpinjam` () RETURNS INT(3) begin
+	declare total_peminjaman int;
+
+	select count(id) into total_peminjaman
+	from transaksi;
+
+	return(total_peminjaman);
+
+	end$$
 
 DELIMITER ;
 
@@ -155,6 +204,13 @@ CREATE TABLE `lak` (
   `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `lak`
+--
+
+INSERT INTO `lak` (`id`, `username`, `password`, `nama_depan`, `nama_belakang`, `email`) VALUES
+(1, 'lak', 'lak', 'lak', 'lak', 'lak@lak.telkomuniversity.ac.id');
+
 -- --------------------------------------------------------
 
 --
@@ -204,7 +260,14 @@ INSERT INTO `penjadwalan` (`id`, `tanggal`, `jam`, `ruang`, `kelas`, `status`) V
 (14, '2019-05-01', '10:00:00', 3, 1, 'canceled'),
 (15, '2019-05-01', '08:00:00', 3, 1, 'canceled'),
 (16, '2019-05-01', '09:00:00', 3, 1, 'canceled'),
-(17, '2019-05-01', '10:00:00', 3, 1, 'canceled');
+(17, '2019-05-01', '10:00:00', 3, 1, 'canceled'),
+(18, '2019-05-01', '08:00:00', 2, 1, 'canceled'),
+(19, '2019-05-01', '09:00:00', 2, 1, 'canceled'),
+(20, '2019-05-01', '10:00:00', 2, 1, 'canceled'),
+(21, '2019-05-02', '08:00:00', 2, 1, 'approved'),
+(22, '2019-05-02', '09:00:00', 2, 1, 'approved'),
+(23, '2019-05-02', '08:00:00', 3, 1, 'approved'),
+(24, '2019-05-02', '09:00:00', 3, 1, 'approved');
 
 -- --------------------------------------------------------
 
@@ -218,6 +281,13 @@ CREATE TABLE `pesan` (
   `subject` int(11) NOT NULL,
   `pesan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pesan`
+--
+
+INSERT INTO `pesan` (`id`, `user`, `subject`, `pesan`) VALUES
+(1, 1, 2, 'asgsdgsdg');
 
 -- --------------------------------------------------------
 
@@ -246,7 +316,10 @@ CREATE TABLE `transaksi` (
 
 INSERT INTO `transaksi` (`id`, `peminjam`, `ruangan`, `jam_masuk`, `jumlah_jam`, `matakuliah`, `kode_dosen`, `tanggal`, `kebutuhan`, `bukti`, `status`, `keterangan`) VALUES
 (6, 1, 3, '08:00:00', 3, 'Sql', 1, '2019-05-01', 'fghrg', '1.1.jpeg', 'canceled', 'praktikum'),
-(7, 1, 3, '08:00:00', 3, 'SS', 1, '2019-05-01', NULL, NULL, 'canceled', 'kelas');
+(7, 1, 3, '08:00:00', 3, 'SS', 1, '2019-05-01', NULL, NULL, 'canceled', 'kelas'),
+(8, 1, 2, '08:00:00', 3, 'Sql', 1, '2019-05-01', NULL, NULL, 'canceled', 'kelas'),
+(9, 1, 2, '08:00:00', 2, 'Sql', 1, '2019-05-02', NULL, NULL, 'approved', 'kelas'),
+(10, 1, 3, '08:00:00', 2, 'DBMS', 1, '2019-05-02', 'pc', 'Admin.JPG', 'approved', 'praktikum');
 
 --
 -- Indexes for dumped tables
@@ -346,7 +419,7 @@ ALTER TABLE `laboratory`
 -- AUTO_INCREMENT for table `lak`
 --
 ALTER TABLE `lak`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `mhs`
@@ -358,19 +431,19 @@ ALTER TABLE `mhs`
 -- AUTO_INCREMENT for table `penjadwalan`
 --
 ALTER TABLE `penjadwalan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
