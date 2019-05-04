@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2019 at 04:26 AM
--- Server version: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: May 04, 2019 at 09:47 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,7 +33,7 @@ join kelas on penjadwalan.kelas = kelas.id
 WHERE penjadwalan.status != 'canceled';
 end$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `history_kelas` (`id` INT)  begin
+CREATE DEFINER=`root`@`localhost` PROCEDURE `history_kelas` (IN `id` INT)  begin
 	select *, dosen.kode as kdosen
 	from transaksi join dosen on transaksi.kode_dosen = dosen.id
   join laboratory on transaksi.ruangan = laboratory.id
@@ -267,7 +267,28 @@ INSERT INTO `penjadwalan` (`id`, `tanggal`, `jam`, `ruang`, `kelas`, `status`) V
 (21, '2019-05-02', '08:00:00', 2, 1, 'approved'),
 (22, '2019-05-02', '09:00:00', 2, 1, 'approved'),
 (23, '2019-05-02', '08:00:00', 3, 1, 'approved'),
-(24, '2019-05-02', '09:00:00', 3, 1, 'approved');
+(24, '2019-05-02', '09:00:00', 3, 1, 'approved'),
+(25, '2019-05-08', '08:00:00', 2, 1, 'canceled'),
+(26, '2019-05-08', '09:00:00', 2, 1, 'canceled'),
+(27, '2019-05-02', '08:00:00', 4, 1, 'canceled'),
+(28, '2019-05-02', '09:00:00', 4, 1, 'canceled'),
+(29, '2019-05-02', '10:00:00', 4, 1, 'canceled'),
+(30, '2019-05-03', '09:00:00', 4, 1, 'canceled'),
+(31, '2019-05-03', '10:00:00', 4, 1, 'canceled'),
+(32, '2019-05-04', '10:00:00', 4, 1, 'canceled'),
+(33, '2019-05-04', '11:00:00', 4, 1, 'canceled'),
+(34, '2019-05-06', '08:00:00', 2, 1, 'approved'),
+(35, '2019-05-06', '09:00:00', 2, 1, 'approved'),
+(36, '2019-05-05', '15:00:00', 2, 1, 'declined'),
+(37, '2019-05-05', '16:00:00', 2, 1, 'declined'),
+(38, '2019-05-05', '17:00:00', 2, 1, 'declined'),
+(39, '2019-05-06', '08:00:00', 5, 1, 'declined'),
+(40, '2019-05-06', '09:00:00', 5, 1, 'declined'),
+(41, '2019-05-03', '10:00:00', 5, 1, 'declined'),
+(42, '2019-05-03', '11:00:00', 5, 1, 'declined'),
+(43, '2019-05-04', '11:00:00', 5, 1, 'approved'),
+(44, '2019-05-04', '12:00:00', 5, 1, 'approved'),
+(45, '2019-05-04', '13:00:00', 5, 1, 'approved');
 
 -- --------------------------------------------------------
 
@@ -319,7 +340,59 @@ INSERT INTO `transaksi` (`id`, `peminjam`, `ruangan`, `jam_masuk`, `jumlah_jam`,
 (7, 1, 3, '08:00:00', 3, 'SS', 1, '2019-05-01', NULL, NULL, 'canceled', 'kelas'),
 (8, 1, 2, '08:00:00', 3, 'Sql', 1, '2019-05-01', NULL, NULL, 'canceled', 'kelas'),
 (9, 1, 2, '08:00:00', 2, 'Sql', 1, '2019-05-02', NULL, NULL, 'approved', 'kelas'),
-(10, 1, 3, '08:00:00', 2, 'DBMS', 1, '2019-05-02', 'pc', 'Admin.JPG', 'approved', 'praktikum');
+(10, 1, 3, '08:00:00', 2, 'DBMS', 1, '2019-05-02', 'pc', 'Admin.JPG', 'approved', 'praktikum'),
+(12, 1, 2, '08:00:00', 2, 'Jarkom', 1, '2019-05-08', NULL, NULL, 'canceled', 'kelas'),
+(14, 1, 4, '08:00:00', 3, 'Perilaku Organisasi', 1, '2019-05-02', NULL, NULL, 'canceled', 'kelas'),
+(15, 1, 4, '09:00:00', 2, 'PBD', 1, '2019-05-03', 'PC', 'readme.rst', 'approved', 'praktikum'),
+(16, 1, 4, '10:00:00', 2, 'PWL', 1, '2019-05-04', NULL, NULL, 'declined', 'kelas'),
+(19, 1, 2, '08:00:00', 2, 'PBD', 1, '2019-05-06', 'jkhk', 'readme.rst', 'pending', 'praktikum'),
+(20, 1, 2, '15:00:00', 3, 'PBD', 1, '2019-05-05', 'pc', 'ERD.graphml', 'pending', 'praktikum'),
+(21, 1, 5, '08:00:00', 2, 'PWL', 1, '2019-05-06', NULL, NULL, 'approved', 'kelas'),
+(22, 1, 5, '10:00:00', 2, 'PBD', 1, '2019-05-03', NULL, NULL, 'pending', 'kelas'),
+(23, 1, 5, '11:00:00', 3, 'Jarkom', 1, '2019-05-04', NULL, NULL, 'pending', 'kelas');
+
+--
+-- Triggers `transaksi`
+--
+DELIMITER $$
+CREATE TRIGGER `afterinsert_trans` AFTER INSERT ON `transaksi` FOR EACH ROW begin
+ insert into transaksi_pinjam
+ set
+ id = NEW.id,
+ tgl_trans = now(),
+ tgl_pinjam = NEW.tanggal,
+ mata_kuliah = NEW.matakuliah,
+ keterangan = NEW.keterangan,
+ aksi = 'INSERT';
+ end
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi_pinjam`
+--
+
+CREATE TABLE `transaksi_pinjam` (
+  `id` int(50) DEFAULT NULL,
+  `tgl_trans` date DEFAULT NULL,
+  `tgl_pinjam` date DEFAULT NULL,
+  `mata_kuliah` varchar(30) DEFAULT NULL,
+  `keterangan` varchar(30) DEFAULT NULL,
+  `aksi` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaksi_pinjam`
+--
+
+INSERT INTO `transaksi_pinjam` (`id`, `tgl_trans`, `tgl_pinjam`, `mata_kuliah`, `keterangan`, `aksi`) VALUES
+(19, '2019-05-02', '2019-05-06', 'PBD', 'praktikum', 'INSERT'),
+(20, '2019-05-02', '2019-05-05', 'PBD', 'praktikum', 'INSERT'),
+(21, '2019-05-02', '2019-05-06', 'PWL', 'kelas', 'INSERT'),
+(22, '2019-05-02', '2019-05-03', 'PBD', 'kelas', 'INSERT'),
+(23, '2019-05-04', '2019-05-04', 'Jarkom', 'kelas', 'INSERT');
 
 --
 -- Indexes for dumped tables
@@ -431,7 +504,7 @@ ALTER TABLE `mhs`
 -- AUTO_INCREMENT for table `penjadwalan`
 --
 ALTER TABLE `penjadwalan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `pesan`
@@ -443,7 +516,7 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
