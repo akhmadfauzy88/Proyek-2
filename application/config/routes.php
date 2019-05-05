@@ -75,3 +75,4 @@ $route["cancel_kelas"] = "ProcessController/cancel_transaksi_kelas";
 $route["cancel_praktikum"] = "ProcessController/cancel_transaksi_praktikum";
 
 $route["respon"] = "AdminController/terima_request";
+$route["Admin/pesan"] = "AdminController/pesan";

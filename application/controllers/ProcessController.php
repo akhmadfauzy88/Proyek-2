@@ -92,15 +92,38 @@ class ProcessController extends CI_Controller {
 		$kode_dosen = $this->input->post("kode_dosen");
 		$tanggal = $this->input->post("tanggal");
 		$kebutuhan = $this->input->post("kebutuhan");
-		$bukti = $this->input->post("bukti");
+		$bukti = $_FILES['bukti']['name'];
 
-		// echo $kode_dosen;
+		// echo $bukti;
 		// die();
 
 		$this->load->model('InputDataModel');
 		$this->InputDataModel->input_data_praktikum($nama, $kelas, $ruang, $jam_masuk, $pinjamruangan, $kode_dosen, $matakuliah, $tanggal, $kebutuhan, $bukti);
-		$this->session->set_flashdata('log_praktikum', 'TRUE');
-		redirect(base_url("Status"));
+
+
+
+		$config['upload_path']          = './gambar/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 100;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+		$this->load->library('upload', $config);
+
+
+
+		if ( ! $this->upload->do_upload('bukti')){
+			$error = array('error' => $this->upload->display_errors());
+			$this->session->set_flashdata('log_error', $error);
+			redirect(base_url("Status"));
+		}else{
+			$this->session->set_flashdata('log_praktikum', 'TRUE');
+			redirect(base_url("Status"));
+		}
+
+		// echo $kode_dosen;
+		// die();
+
+
 	}
 
 }

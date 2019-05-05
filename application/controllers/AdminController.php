@@ -18,6 +18,16 @@ class AdminController extends CI_Controller {
     $this->load->view('Admin/Template/Footer');
 	}
 
+	public function pesan(){
+		$this->load->model('GetAdminModel');
+		$data['pesan'] = $this->GetAdminModel->get_pesan();;
+
+    $this->load->view('Admin/Template/Header');
+		$this->load->view('Admin/Pesan/index', $data);
+		//$this->load->view('Admin/Pesan/index');
+    $this->load->view('Admin/Template/Footer');
+	}
+
 	public function terima_request(){
 		$terima = $this->input->post("terima");
 		$tolak = $this->input->post("tolak");

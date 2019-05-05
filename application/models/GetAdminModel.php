@@ -20,6 +20,16 @@ class GetAdminModel extends CI_Model {
     return $data;
   }
 
+  public function get_pesan(){
+    $query = $this->db->query('call cek_pesan()');
+    $data = $query->result();
+
+    $query->next_result();
+    $query->free_result();
+
+    return $data;
+  }
+
   public function req_kelas(){
     $query = $this->db->query('call request_kelas()');
     $data = $query->result();

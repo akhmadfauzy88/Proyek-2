@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2019 at 09:47 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 5.6.40
+-- Generation Time: May 06, 2019 at 01:13 AM
+-- Server version: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -26,6 +26,11 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cek_pesan` ()  NO SQL
+SELECT pesan.id, pesan.pesan, mhs.email, laboratory.kode FROM pesan
+JOIN mhs ON pesan.user = mhs.id
+JOIN laboratory ON pesan.subject = laboratory.id$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `dashboard` ()  begin
 select * from penjadwalan
 join laboratory on penjadwalan.ruang = laboratory.id
@@ -288,7 +293,15 @@ INSERT INTO `penjadwalan` (`id`, `tanggal`, `jam`, `ruang`, `kelas`, `status`) V
 (42, '2019-05-03', '11:00:00', 5, 1, 'declined'),
 (43, '2019-05-04', '11:00:00', 5, 1, 'approved'),
 (44, '2019-05-04', '12:00:00', 5, 1, 'approved'),
-(45, '2019-05-04', '13:00:00', 5, 1, 'approved');
+(45, '2019-05-04', '13:00:00', 5, 1, 'approved'),
+(46, '2019-05-06', '08:00:00', 3, 1, 'pending'),
+(47, '2019-05-06', '09:00:00', 3, 1, 'pending'),
+(48, '2019-05-06', '10:00:00', 3, 1, 'pending'),
+(49, '2019-05-06', '10:00:00', 2, 1, 'pending'),
+(50, '2019-05-06', '15:00:00', 2, 1, 'pending'),
+(51, '2019-05-06', '13:00:00', 3, 1, 'pending'),
+(52, '2019-05-06', '08:00:00', 10, 1, 'pending'),
+(53, '2019-05-06', '09:00:00', 10, 1, 'pending');
 
 -- --------------------------------------------------------
 
@@ -349,7 +362,14 @@ INSERT INTO `transaksi` (`id`, `peminjam`, `ruangan`, `jam_masuk`, `jumlah_jam`,
 (20, 1, 2, '15:00:00', 3, 'PBD', 1, '2019-05-05', 'pc', 'ERD.graphml', 'pending', 'praktikum'),
 (21, 1, 5, '08:00:00', 2, 'PWL', 1, '2019-05-06', NULL, NULL, 'approved', 'kelas'),
 (22, 1, 5, '10:00:00', 2, 'PBD', 1, '2019-05-03', NULL, NULL, 'pending', 'kelas'),
-(23, 1, 5, '11:00:00', 3, 'Jarkom', 1, '2019-05-04', NULL, NULL, 'pending', 'kelas');
+(23, 1, 5, '11:00:00', 3, 'Jarkom', 1, '2019-05-04', NULL, NULL, 'pending', 'kelas'),
+(24, 1, 3, '08:00:00', 2, 'SS', 1, '2019-05-06', 'p', NULL, 'pending', 'praktikum'),
+(25, 1, 3, '10:00:00', 1, 'SS', 1, '2019-05-06', 'j', NULL, 'pending', 'praktikum'),
+(26, 1, 2, '10:00:00', 1, 'SS', 1, '2019-05-06', 'lkj', NULL, 'pending', 'praktikum'),
+(27, 1, 2, '15:00:00', 1, 'SS', 1, '2019-05-06', 'jkk', NULL, 'pending', 'praktikum'),
+(28, 1, 3, '13:00:00', 1, 'SS', 1, '2019-05-06', 'asv', NULL, 'pending', 'praktikum'),
+(29, 1, 10, '08:00:00', 1, 'SS', 1, '2019-05-06', 'bhjbh', 'Blok Diagram.png', 'pending', 'praktikum'),
+(30, 1, 10, '09:00:00', 1, 'SS', 1, '2019-05-06', 'vz', 'Blok Diagram.png', 'pending', 'praktikum');
 
 --
 -- Triggers `transaksi`
@@ -392,7 +412,14 @@ INSERT INTO `transaksi_pinjam` (`id`, `tgl_trans`, `tgl_pinjam`, `mata_kuliah`, 
 (20, '2019-05-02', '2019-05-05', 'PBD', 'praktikum', 'INSERT'),
 (21, '2019-05-02', '2019-05-06', 'PWL', 'kelas', 'INSERT'),
 (22, '2019-05-02', '2019-05-03', 'PBD', 'kelas', 'INSERT'),
-(23, '2019-05-04', '2019-05-04', 'Jarkom', 'kelas', 'INSERT');
+(23, '2019-05-04', '2019-05-04', 'Jarkom', 'kelas', 'INSERT'),
+(24, '2019-05-06', '2019-05-06', 'SS', 'praktikum', 'INSERT'),
+(25, '2019-05-06', '2019-05-06', 'SS', 'praktikum', 'INSERT'),
+(26, '2019-05-06', '2019-05-06', 'SS', 'praktikum', 'INSERT'),
+(27, '2019-05-06', '2019-05-06', 'SS', 'praktikum', 'INSERT'),
+(28, '2019-05-06', '2019-05-06', 'SS', 'praktikum', 'INSERT'),
+(29, '2019-05-06', '2019-05-06', 'SS', 'praktikum', 'INSERT'),
+(30, '2019-05-06', '2019-05-06', 'SS', 'praktikum', 'INSERT');
 
 --
 -- Indexes for dumped tables
@@ -504,7 +531,7 @@ ALTER TABLE `mhs`
 -- AUTO_INCREMENT for table `penjadwalan`
 --
 ALTER TABLE `penjadwalan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `pesan`
@@ -516,7 +543,7 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables

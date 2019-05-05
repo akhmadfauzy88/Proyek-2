@@ -14,7 +14,7 @@
         PEMINJAMAN RUANGAN - PRAKTIKUM
       </div>
       <div class="Con-body">
-        <form class="" action="pinjam_praktikum" method="post">
+        <form class="" action="pinjam_praktikum" method="post" enctype="multipart/form-data">
           <input type="hidden" name="nama" value="<?php echo $id = $this->session->userdata('id'); ?>">
           <input type="hidden" name="kelas" value="<?php echo $id = $this->session->userdata('kelas'); ?>">
           <label for="">Ruangan</label>

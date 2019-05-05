@@ -1,3 +1,4 @@
+<?php $log_e = $this->session->flashdata('log_error'); ?>
 <?php $log = $this->session->flashdata('log_kelas'); ?>
 <?php $cancel = $this->session->flashdata('log_kelas_cancel'); ?>
 
@@ -12,6 +13,15 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-10" style="margin-top: 15px;">
+      <?php if (isset($log_e)): ?>
+        <div class="Heading" style="background:none;border:none;">
+          <div class="alert alert-danger" role="alert">
+            <center>
+              Peminjaman gagal dilakukan.
+            </center>
+          </div>
+        </div>
+      <?php endif; ?>
       <?php if (isset($log)): ?>
         <div class="Heading" style="background:none;border:none;">
           <div class="alert alert-success" role="alert">

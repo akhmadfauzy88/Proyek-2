@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-9">
+                            <div class="col-lg-12">
                                 <h2 class="title-1 m-b-25">Daftar Peminjaman - Kelas Pengganti</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
@@ -106,9 +106,9 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <!-- <div class="col-lg-3">
                                 <h2 class="title-1 m-b-25">History Peminjaman</h2>
-                                <div class="au-card au-card--bg-blue au-card-top-countries m-b-40">
+                                <div class="au-card au-card- -bg-blue au-card-top-countries m-b-40">
                                     <div class="au-card-inner">
                                         <div class="table-responsive">
                                             <table class="table table-top-countries">
@@ -130,10 +130,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
-                            <div class="col-lg-9">
+                            <div class="col-lg-12">
                                 <h2 class="title-1 m-b-25">Daftar Peminjaman - Praktikum</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
@@ -160,7 +160,9 @@
                                               <td><?php echo $value->kdosen ?></td>
                                               <td><?php echo $value->tanggal ?></td>
                                               <td><?php echo $value->kebutuhan ?></td>
-                                              <td><?php echo $value->bukti ?></td>
+                                              <td>
+                                                <a href="<?php echo base_url() ?>gambar/<?php echo $value->bukti ?>"><?php echo $value->bukti ?></a>
+                                              </td>
                                               <td>
                                                 <form action="<?php echo base_url() ?>respon" method="post">
                                                   <input type="hidden" name="id" value="<?php echo $value->idx ?>" />
@@ -175,9 +177,9 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <!-- <div class="col-lg-3">
                                 <h2 class="title-1 m-b-25">History Peminjaman</h2>
-                                <div class="au-card au-card--bg-blue au-card-top-countries m-b-40">
+                                <div class="au-card au-card- -bg-blue au-card-top-countries m-b-40">
                                     <div class="au-card-inner">
                                         <div class="table-responsive">
                                             <table class="table table-top-countries">
@@ -199,7 +201,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
                             <div class="col-md-12">
